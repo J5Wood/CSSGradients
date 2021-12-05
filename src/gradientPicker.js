@@ -6,14 +6,19 @@ const greenInput = document.querySelector(".green")
 const opacityInput = document.querySelector(".opacity-number")
 
 let red = 0
+let green = 255
 let blue = 0
-let green = 0
 let opacity = 1
 
 redInput.addEventListener("keyup", e => handleColorChange(e))
 blueInput.addEventListener("keyup", e => handleColorChange(e))
 greenInput.addEventListener("keyup", e => handleColorChange(e))
 opacityInput.addEventListener("keyup", e => handleColorChange(e))
+
+// redInput.addEventListener("deselect", e => handleDeselection(e))
+// blueInput.addEventListener("deselect", e => handleDeselection(e))
+// greenInput.addEventListener("deselect", e => handleDeselection(e))
+// opacityInput.addEventListener("deselect", e => handleDeselection(e))
 
 function handleColorChange(e) {
     if(e.target.value > 255) e.target.value = 255
@@ -27,5 +32,9 @@ function handleColorChange(e) {
     } else {
         opacity = e.target.value
     }
-    colorDisplay.style.backgroundColor = `rgba(${red}, ${blue}, ${green}, ${opacity})`
+    colorDisplay.style.backgroundColor = `rgba(${red}, ${green}, ${blue}, ${opacity})`
 }
+
+// function handleDeselection(e) {
+//     console.log(e.target)
+// }
