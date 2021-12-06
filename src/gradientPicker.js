@@ -1,5 +1,6 @@
 const colorDisplay = document.querySelector(".color-display")
 
+const hexInput = document.querySelector(".hex-value")
 const redInput = document.querySelector(".red")
 const blueInput = document.querySelector(".blue")
 const greenInput = document.querySelector(".green")
@@ -14,11 +15,7 @@ redInput.addEventListener("keyup", e => handleColorChange(e))
 blueInput.addEventListener("keyup", e => handleColorChange(e))
 greenInput.addEventListener("keyup", e => handleColorChange(e))
 opacityInput.addEventListener("keyup", e => handleColorChange(e))
-
-// redInput.addEventListener("deselect", e => handleDeselection(e))
-// blueInput.addEventListener("deselect", e => handleDeselection(e))
-// greenInput.addEventListener("deselect", e => handleDeselection(e))
-// opacityInput.addEventListener("deselect", e => handleDeselection(e))
+hexInput.addEventListener("change", e => handleHexChange(e))
 
 function handleColorChange(e) {
     if(e.target.value > 255) e.target.value = 255
@@ -32,8 +29,40 @@ function handleColorChange(e) {
     } else {
         opacity = e.target.value
     }
-    colorDisplay.style.backgroundColor = `rgba(${red}, ${green}, ${blue}, ${opacity})`
+
+    // ***** Can move changing hex to deselction on color inputs, would be smoother
+    const hexValArr = [parseInt(red).toString(16), parseInt(green).toString(16), parseInt(blue).toString(16)]
+    for(let i = 0; i < hexValArr.length; i++){
+        hexValArr[i] = hexValArr[i].padStart(2, "0")
+    }
+    hexInput.value = hexValArr.join("")
+
+    colorDisplay.style.background = `linear-gradient(0deg, rgba(${red}, ${green}, ${blue}, ${opacity}), rgba(${red}, ${green}, ${blue}, ${opacity}))`
 }
+
+function handleHexChange(e) {
+    // ***** if input has illegal inputs, set to all 0s
+
+    
+    let numArr = e.target.value.split(/(.{2})/gm).filter(val => !!val === true)
+    let numValArr = numArr.map(num => parseInt(num, 16))
+
+    red = redInput.value = numValArr[0]
+    green = greenInput.value = numValArr[1]
+    blue = blueInput.value = numValArr[2]
+
+    colorDisplay.style.background = `linear-gradient(0deg, rgba(${red}, ${green}, ${blue}, ${opacity}), rgba(${red}, ${green}, ${blue}, ${opacity}))`
+}
+
+
+
+// ***** Make input boxes return to 0 when box is left empty, 
+// ***** but don't assign to 0 whenbox is just cleared and cursor still in box (on backspaces)
+
+// redInput.addEventListener("deselect", e => handleDeselection(e))
+// blueInput.addEventListener("deselect", e => handleDeselection(e))
+// greenInput.addEventListener("deselect", e => handleDeselection(e))
+// opacityInput.addEventListener("deselect", e => handleDeselection(e))
 
 // function handleDeselection(e) {
 //     console.log(e.target)

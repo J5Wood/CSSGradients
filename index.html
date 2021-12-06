@@ -12,16 +12,24 @@
         <h1>CSS Gradient Tester</h1>
         <div class="color-display">
         </div>
-        <div class="color-entry">
+        <div class="color-selection">
+            <label for="hex-value">#</label>
+            <input type="text" name="hex-value" value="000000" maxlength="6" class="hex-value">
+            <br/>
             <label for="red">Red</label>
-            <input type="number" name="red" step="1" min="0" max="255" value="0" class="color-number red">
+            <input type="number" name="red" step="1" min="0" max="255" value="0" class="red">
             <label for="green">Green</label>
-            <input type="number" name="green" step="1" min="0" max="255" value="255" class="color-number green">
+            <input type="number" name="green" step="1" min="0" max="255" value="255" class="green">
             <label for="blue">Blue</label>
-            <input type="number" name="blue" step="1" min="0" max="255" value="0" class="color-number blue">
+            <input type="number" name="blue" step="1" min="0" max="255" value="0" class="blue">
             <label for="color-opacity">Opacity</label>
-            <input type="number" name="color-opacity" step=".1" min="0" max="1" value="1" class="opacity-number">
+            <input type="number" name="color-opacity" step=".01" min="0" max="1" value="1" class="opacity-number">
         </div>
+        <ul class="color-list">
+            <li class="color">
+                #1 
+            </li>
+        </ul>
       </main>
       <script type="text/javascript" src="src/gradientPicker.js"></script>
   </body>
