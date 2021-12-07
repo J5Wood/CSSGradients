@@ -11,11 +11,21 @@ let green = 255
 let blue = 0
 let opacity = 1
 
+redInput.addEventListener("change", e => handleColorChange(e))
+blueInput.addEventListener("change", e => handleColorChange(e))
+greenInput.addEventListener("change", e => handleColorChange(e))
+opacityInput.addEventListener("change", e => handleColorChange(e))
+hexInput.addEventListener("change", e => handleHexChange(e))
+
 redInput.addEventListener("keyup", e => handleColorChange(e))
 blueInput.addEventListener("keyup", e => handleColorChange(e))
 greenInput.addEventListener("keyup", e => handleColorChange(e))
 opacityInput.addEventListener("keyup", e => handleColorChange(e))
-hexInput.addEventListener("change", e => handleHexChange(e))
+
+redInput.addEventListener("blur", e => handleEmptyDeselection(e))
+blueInput.addEventListener("blur", e => handleEmptyDeselection(e))
+greenInput.addEventListener("blur", e => handleEmptyDeselection(e))
+opacityInput.addEventListener("blur", e => handleEmptyDeselection(e))
 
 function handleColorChange(e) {
     if(e.target.value > 255) e.target.value = 255
@@ -30,9 +40,9 @@ function handleColorChange(e) {
         opacity = e.target.value
     }
 
-    // ***** Can move changing hex to deselction on color inputs, would be smoother
     const hexValArr = [parseInt(red).toString(16), parseInt(green).toString(16), parseInt(blue).toString(16)]
     for(let i = 0; i < hexValArr.length; i++){
+        if(hexValArr[i] === "NaN") hexValArr[i] = "00"
         hexValArr[i] = hexValArr[i].padStart(2, "0")
     }
     hexInput.value = hexValArr.join("")
@@ -41,12 +51,17 @@ function handleColorChange(e) {
 }
 
 function handleHexChange(e) {
-    // ***** if input has illegal inputs, set to all 0s
-
-    
-    let numArr = e.target.value.split(/(.{2})/gm).filter(val => !!val === true)
-    let numValArr = numArr.map(num => parseInt(num, 16))
-
+    let numValArr
+    if(!!e.target.value.match(/[^0-9a-fA-F]+/gm)){
+        numValArr = [0, 0, 0]
+        hexInput.value = "000000"
+    } else{
+        if(e.target.value.length < 6) {
+            e.target.value = e.target.value.padStart(6, "0")
+        }
+        let numArr = e.target.value.split(/(.{2})/gm).filter(val => !!val === true)
+        numValArr = numArr.map(num => parseInt(num, 16))
+    }
     red = redInput.value = numValArr[0]
     green = greenInput.value = numValArr[1]
     blue = blueInput.value = numValArr[2]
@@ -54,16 +69,10 @@ function handleHexChange(e) {
     colorDisplay.style.background = `linear-gradient(0deg, rgba(${red}, ${green}, ${blue}, ${opacity}), rgba(${red}, ${green}, ${blue}, ${opacity}))`
 }
 
+function handleEmptyDeselection(e){
+    if(!e.target.value) {
+        e.target.value = "0"
+        handleColorChange(e)
+    }
+}
 
-
-// ***** Make input boxes return to 0 when box is left empty, 
-// ***** but don't assign to 0 whenbox is just cleared and cursor still in box (on backspaces)
-
-// redInput.addEventListener("deselect", e => handleDeselection(e))
-// blueInput.addEventListener("deselect", e => handleDeselection(e))
-// greenInput.addEventListener("deselect", e => handleDeselection(e))
-// opacityInput.addEventListener("deselect", e => handleDeselection(e))
-
-// function handleDeselection(e) {
-//     console.log(e.target)
-// }
