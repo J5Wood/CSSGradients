@@ -1,3 +1,5 @@
+// ***** Display and input section
+
 const colorDisplay = document.querySelector(".color-display")
 
 const hexInput = document.querySelector(".hex-value")
@@ -76,3 +78,14 @@ function handleEmptyDeselection(e){
     }
 }
 
+// ***** List section
+
+const colorList = document.getElementsByClassName("color")
+for(let i = 0; i < colorList.length; i++){
+    colorList[i].addEventListener("click", e => handleColorSelection(e))
+}
+// colorList.forEach(color => color.addEventListener("click", e => handleColorSelection(e)))
+// debugger
+function handleColorSelection(e){
+    console.log(e.target)
+}
