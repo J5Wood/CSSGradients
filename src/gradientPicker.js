@@ -7,7 +7,7 @@ const redInput = document.querySelector(".red")
 const blueInput = document.querySelector(".blue")
 const greenInput = document.querySelector(".green")
 const opacityInput = document.querySelector(".opacity-number")
-
+const gradientList = document.querySelector(".gradient-list")
 let red = 0
 let green = 255
 let blue = 0
@@ -18,6 +18,7 @@ blueInput.addEventListener("change", e => handleColorChange(e))
 greenInput.addEventListener("change", e => handleColorChange(e))
 opacityInput.addEventListener("change", e => handleColorChange(e))
 hexInput.addEventListener("change", e => handleHexChange(e))
+gradientList.addEventListener("change", e => handleGradientChange(e))
 
 redInput.addEventListener("keyup", e => handleColorChange(e))
 blueInput.addEventListener("keyup", e => handleColorChange(e))
@@ -76,6 +77,12 @@ function handleEmptyDeselection(e){
         e.target.value = "0"
         handleColorChange(e)
     }
+}
+
+function handleGradientChange(e){
+    console.log(e.target.value)
+    debugger
+    colorDisplay.style.background = `${e.target.value}-gradient(0deg, rgba(${red}, ${green}, ${blue}, ${opacity}), rgba(${red}, ${green}, ${blue}, ${opacity}))`
 }
 
 // ***** List section
