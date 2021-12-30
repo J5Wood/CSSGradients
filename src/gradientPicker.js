@@ -91,8 +91,12 @@ const colorList = document.getElementsByClassName("color")
 for(let i = 0; i < colorList.length; i++){
     colorList[i].addEventListener("click", e => handleColorSelection(e))
 }
-// colorList.forEach(color => color.addEventListener("click", e => handleColorSelection(e)))
-// debugger
+let currentColor = colorList[0]
+
 function handleColorSelection(e){
-    console.log(e.target)
+    currentColor.classList.remove("selected-color")
+    currentColor = e.target
+    e.target.classList.add("selected-color")
+
+    
 }
