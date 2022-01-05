@@ -4,6 +4,7 @@ html, body {
     height: 100%;
     width: 100%;
     background-color: aqua;
+    text-align: center;
 }
 
 .main-body{
@@ -31,6 +32,23 @@ h1{
 
 .color-list{
     min-height: fit-content;
+    /* text-align: center; */
+}
+
+.add-color-button{
+    
+    background-color: rgb(150, 150, 150);
+    border: 1px solid rgb(48, 48, 48);
+    box-shadow: 2px 2px 5px black;
+    color: rgb(0, 0, 0);
+    padding: 5px 12px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 2em;
+}
+
+.add-color-button:hover{
+    background-color: rgb(204, 204, 204);
 }
 
 .color{
@@ -42,22 +60,28 @@ h1{
     border: 2px solid black;
 }
 
-.color p{
-    padding: 0 10%;
-    font-size: 1.25em;
-}
-
 .selected-color{
     height: 35px;
     border-width: 5px;
 }
 
+.color p{
+    padding: 0 10%;
+    font-size: 1.25em;
+}
+
 .color h3{
     padding-left: 5px;
 }
+
 .color-sample{
     display: inline-block;
     background-color: black;
     height: 28px;
     width: 28px;
+}
+
+.delete-color-button{
+    background-color: rgb(231, 0, 0);
+    color: rgb(0, 0, 0);
 }

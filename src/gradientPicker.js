@@ -86,17 +86,51 @@ function handleGradientChange(e){
 }
 
 // ***** List section
-
-const colorList = document.getElementsByClassName("color")
-for(let i = 0; i < colorList.length; i++){
-    colorList[i].addEventListener("click", e => handleColorSelection(e))
-}
-let currentColor = colorList[0]
+const colorList = document.querySelector(".color-list")
+const colors = document.getElementsByClassName("color")
+let currentColor = colors[0]
+currentColor.addEventListener("click", e => handleColorSelection(e))
+currentColor.lastElementChild.addEventListener("click", e => removeColor(e))
 
 function handleColorSelection(e){
     currentColor.classList.remove("selected-color")
     currentColor = e.target
     e.target.classList.add("selected-color")
+}
 
-    
+
+const addColorButton = document.querySelector(".add-color-button")
+addColorButton.addEventListener("click", addNewColor)
+
+function addNewColor(){
+    const newItem = document.createElement("li")
+    newItem.classList.add("color")
+
+    const span = document.createElement("span")
+    span.classList.add("color-sample")
+
+    const h3 = document.createElement("h3")
+    h3.innerText = "Color Sample 1"
+
+    const input = document.createElement("input")
+    input.setAttribute("name", "color-input")
+    input.setAttribute("value", "#000000")
+
+    const button = document.createElement("button")
+    button.classList.add("delete-color-button")
+    button.innerText = "X"
+    button.addEventListener("click", e => removeColor(e))
+
+    newItem.appendChild(span)
+    newItem.appendChild(h3)
+    newItem.appendChild(input)
+    newItem.appendChild(button)
+    newItem.addEventListener("click", e => handleColorSelection(e))
+
+    colorList.appendChild(newItem)
+}
+
+function removeColor(e){
+    e.target.parentElement.remove()
+    e.stopPropagation()
 }
