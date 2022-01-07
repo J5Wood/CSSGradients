@@ -19,6 +19,8 @@
                 <option value="radial">Radial Gradient</option>
                 <option value="conic">Conic Gradient</option>
             </select>
+            <label for="degrees">Degrees: </label>
+            <input type="number" step="1" min="0" max="359">°
             <label for="hex-value">#</label>
             <input type="text" name="hex-value" value="000000" maxlength="6" class="hex-value">
             <br/>
@@ -30,6 +32,9 @@
             <input type="number" name="blue" step="1" min="0" max="255" value="0" class="blue">
             <label for="color-opacity">Opacity</label>
             <input type="number" name="color-opacity" step=".01" min="0" max="1" value="1" class="opacity-number">
+            <Label for="percent-one">Percentage(s): </Label>
+            <input type="number" name="percent-one" step="1" min="0" max="100" class="percentage">
+            <input type="number" name="percent-two" step="1" min="0" max="100" class="percentage">
         </div>
         <ul class="color-list">
             <li class="color">

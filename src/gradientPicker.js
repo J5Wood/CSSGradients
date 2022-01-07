@@ -1,5 +1,12 @@
 // ***** Display and input section
 
+
+
+// ***** Each list item needs to have option for one or two degree values between 0 and 100
+// ***** Maybe a slider later? Start with input boxes.
+// ***** Need degree adjuster up top, one adjuster for all values
+
+
 const colorDisplay = document.querySelector(".color-display")
 
 const hexInput = document.querySelector(".hex-value")
