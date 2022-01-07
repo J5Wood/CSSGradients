@@ -94,8 +94,12 @@ currentColor.lastElementChild.addEventListener("click", e => removeColor(e))
 
 function handleColorSelection(e){
     currentColor.classList.remove("selected-color")
+    if(e.target.className === 'color'){
     currentColor = e.target
-    e.target.classList.add("selected-color")
+    } else {
+        currentColor = e.target.parentElement
+    }
+    currentColor.classList.add("selected-color")
 }
 
 
