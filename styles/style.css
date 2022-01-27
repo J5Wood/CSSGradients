@@ -3,26 +3,24 @@ html, body {
     padding: 0;
     height: 100%;
     width: 100%;
-    background-color: aqua;
+    background-color: rgb(255, 255, 255);
     text-align: center;
 }
 
 .main-body{
     height: 100%;
     width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
 }
 
-h1{
-    padding: 10px;
-    text-align: center;
-}
-
-.color-display{
+.selection-display{
     border: 2px solid black;
     margin: 5% 10%;
     width: 60%;
     height: 40%;
-    background: linear-gradient(0deg, rgba(0, 255, 0, 1), rgba(0, 255, 255, 1));
+    background: rgba(0, 255, 0, 1);
 }
 
 
@@ -32,7 +30,6 @@ h1{
 
 .color-list{
     min-height: fit-content;
-    /* text-align: center; */
 }
 
 .add-color-button{

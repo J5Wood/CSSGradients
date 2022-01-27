@@ -7,7 +7,7 @@
 // ***** Need degree adjuster up top, one adjuster for all values
 
 
-const colorDisplay = document.querySelector(".color-display")
+const colorDisplay = document.querySelector(".selection-display")
 
 const hexInput = document.querySelector(".hex-value")
 const redInput = document.querySelector(".red")
@@ -57,7 +57,7 @@ function handleColorChange(e) {
     }
     hexInput.value = hexValArr.join("")
 
-    colorDisplay.style.background = `linear-gradient(0deg, rgba(${red}, ${green}, ${blue}, ${opacity}), rgba(${red}, ${green}, ${blue}, ${opacity}))`
+    colorDisplay.style.background = `rgba(${red}, ${green}, ${blue}, ${opacity})`
 }
 
 function handleHexChange(e) {
@@ -76,7 +76,7 @@ function handleHexChange(e) {
     green = greenInput.value = numValArr[1]
     blue = blueInput.value = numValArr[2]
 
-    colorDisplay.style.background = `linear-gradient(0deg, rgba(${red}, ${green}, ${blue}, ${opacity}), rgba(${red}, ${green}, ${blue}, ${opacity}))`
+    colorDisplay.style.background = `rgba(${red}, ${green}, ${blue}, ${opacity})`
 }
 
 function handleEmptyDeselection(e){
