@@ -20,7 +20,7 @@ html, body {
     flex-flow: row nowrap;
     justify-content: space-around;
     width: 90%;
-    padding: 30px;
+    padding: 10px;
 }
 
 .selection-display{
@@ -31,21 +31,20 @@ html, body {
 }
 
 .color-selection{
-    padding: 0% 10%;
+    border-top: 2px solid black;
+    padding: 40px 10px;
 }
 
 .color-list{
-    margin: 0;
     padding: 0;
-    /* width: 100%; */
     min-height: fit-content;
     display: flex;
     flex-flow: column nowrap;
-
+    align-items: center;
 }
 
 .add-color-button{
-    
+    width: 50px;
     background-color: rgb(150, 150, 150);
     border: 1px solid rgb(48, 48, 48);
     box-shadow: 2px 2px 5px black;
