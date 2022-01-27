@@ -57,7 +57,9 @@ function handleColorChange(e) {
     }
     hexInput.value = hexValArr.join("")
 
-    colorDisplay.style.background = `rgba(${red}, ${green}, ${blue}, ${opacity})`
+    colorDisplay.style.background = currentColor.firstElementChild.style.background = `rgba(${red}, ${green}, ${blue}, ${opacity})`
+
+    currentColor.getElementsByTagName("input")[0].value = hexValArr.join("")
 }
 
 function handleHexChange(e) {
@@ -76,7 +78,8 @@ function handleHexChange(e) {
     green = greenInput.value = numValArr[1]
     blue = blueInput.value = numValArr[2]
 
-    colorDisplay.style.background = `rgba(${red}, ${green}, ${blue}, ${opacity})`
+    colorDisplay.style.background = currentColor.firstElementChild.style.background = `rgba(${red}, ${green}, ${blue}, ${opacity})`
+    currentColor.getElementsByTagName("input")[0].value = e.target.value
 }
 
 function handleEmptyDeselection(e){
