@@ -137,8 +137,7 @@ function addNewColor(){
     newItem.appendChild(input)
     newItem.appendChild(button)
     newItem.addEventListener("click", e => handleColorSelection(e))
-
-    colorList.appendChild(newItem)
+    colorList.insertBefore(newItem, colorList.lastElementChild)
 }
 
 function removeColor(e){
