@@ -1,95 +1,96 @@
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
-    background-color: rgb(255, 255, 255);
-    text-align: center;
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  text-align: center;
 }
 
-.main-body{
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
+.main-body {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
 }
 
-.list-container{
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-around;
-    width: 90%;
-    padding: 10px;
+.list-container {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  width: 90%;
+  padding: 10px;
 }
 
-.selection-display{
-    border: 2px solid black;
-    width: 200px;
-    height: 200px;
-    background: rgba(0, 255, 0, 1);
+.selection-display {
+  border: 2px solid black;
+  width: 200px;
+  height: 200px;
+  background: rgba(0, 255, 0, 1);
 }
 
-.color-selection{
-    border-top: 2px solid black;
-    padding: 40px 10px;
+.color-selection {
+  border-top: 2px solid black;
+  padding: 40px 10px;
 }
 
-.color-list{
-    padding: 0;
-    min-height: fit-content;
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
+.color-list {
+  padding: 0;
+  min-height: fit-content;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
 }
 
-.add-color-button{
-    width: 50px;
-    background-color: rgb(150, 150, 150);
-    border: 1px solid rgb(48, 48, 48);
-    box-shadow: 2px 2px 5px black;
-    color: rgb(0, 0, 0);
-    padding: 5px 12px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 2em;
+.add-color-button {
+  width: 50px;
+  background-color: rgb(150, 150, 150);
+  border: 1px solid rgb(48, 48, 48);
+  box-shadow: 2px 2px 5px black;
+  color: rgb(0, 0, 0);
+  padding: 5px 12px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 2em;
 }
 
-.add-color-button:hover{
-    background-color: rgb(204, 204, 204);
+.add-color-button:hover {
+  background-color: rgb(204, 204, 204);
 }
 
-.color{
-    display: flex;
-    align-items: center;
-    height: 30px;
-    margin: 10px;
-    padding: 5px;
-    border: 2px solid black;
+.color {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  margin: 10px;
+  padding: 5px;
+  border: 2px solid black;
 }
 
-.selected-color{
-    height: 35px;
-    border-width: 5px;
+.selected-color {
+  height: 35px;
+  border-width: 5px;
 }
 
-.color p{
-    padding: 0 10%;
-    font-size: 1.25em;
+.color p {
+  padding: 0 10%;
+  font-size: 1.25em;
 }
 
-.color h3{
-    padding-left: 5px;
+.color h3 {
+  padding-left: 5px;
 }
 
-.color-sample{
-    display: inline-block;
-    background-color: black;
-    height: 28px;
-    width: 28px;
+.color-sample {
+  display: inline-block;
+  background-color: #000000;
+  height: 28px;
+  width: 28px;
 }
 
-.delete-color-button{
-    background-color: rgb(231, 0, 0);
-    color: rgb(0, 0, 0);
+.delete-color-button {
+  background-color: rgb(231, 0, 0);
+  color: rgb(0, 0, 0);
 }
