@@ -46,7 +46,6 @@ function handleColorChange(e) {
   } else {
     opacity = e.target.value;
   }
-
   const hexValArr = [
     parseInt(red).toString(16),
     parseInt(green).toString(16),
@@ -60,6 +59,7 @@ function handleColorChange(e) {
 
   colorDisplay.style.background =
     currentColor.firstElementChild.style.background = `rgba(${red}, ${green}, ${blue}, ${opacity})`;
+  currentColor.setAttribute("data-opacity", `${opacity}`);
 
   currentColor.getElementsByTagName("input")[0].value = `#${hexValArr.join(
     ""
@@ -67,6 +67,7 @@ function handleColorChange(e) {
 }
 
 function handleHexChange(value) {
+  opacity = opacityInput.value;
   let numValArr;
   if (!!value.match(/[^0-9a-fA-F]+/gm)) {
     numValArr = [0, 0, 0];
@@ -82,8 +83,7 @@ function handleHexChange(value) {
   green = greenInput.value = numValArr[1];
   blue = blueInput.value = numValArr[2];
 
-  colorDisplay.style.background =
-    currentColor.firstElementChild.style.background = `rgba(${red}, ${green}, ${blue}, ${opacity})`;
+  currentColor.firstElementChild.style.background = `rgba(${red}, ${green}, ${blue}, ${opacity})`;
   currentColor.getElementsByTagName("input")[0].value = `#${value}`;
 }
 
@@ -119,7 +119,7 @@ function handleColorSelection(e) {
 
   let hexColor = currentColor.children[2].value.slice(1);
   hexInput.value = hexColor;
-
+  opacityInput.value = currentColor.dataset.opacity;
   handleHexChange(hexColor);
 }
 
@@ -129,6 +129,7 @@ addColorButton.addEventListener("click", addNewColor);
 function addNewColor() {
   const newItem = document.createElement("li");
   newItem.classList.add("color");
+  newItem.setAttribute("data-opacity", "1");
 
   const span = document.createElement("span");
   span.classList.add("color-sample");
