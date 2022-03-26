@@ -20,8 +20,8 @@
             </select>
             <label for="degrees">Degrees: </label>
             <input type="number" step="1" min="0" max="359">°
-            <label for="hex-value">#</label>
-            <input type="text" name="hex-value" value="00ff00" maxlength="6" class="hex-value">
+            <label for="hex-value">Hex: </label>
+            <input type="text" name="hex-value" value="#00ff00" maxlength="7" class="hex-value">
             <br/>
             <label for="red">Red</label>
             <input type="number" name="red" step="1" min="0" max="255" value="0" class="red">
@@ -38,12 +38,12 @@
         <div class="list-container">
             <div class="selection-display"></div>
             <ul class="color-list">
-                <li class="color selected-color">
+                <!-- <li class="color selected-color" data-opacity="1">
                     <span class="color-sample"></span>
                     <h3> Color Sample 1 </h3>
-                    <input name="color-input" value="#00ff00"/>
+                    <input type="text" name="color-input" value="#00ff00" maxlength="7"/>
                     <button class="delete-color-button">X</button>
-                </li>
+                </li> -->
                 <button class="add-color-button">+</button>
             </ul>
         </div>

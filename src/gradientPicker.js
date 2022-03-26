@@ -3,7 +3,8 @@
 // ***** Each list item needs to have option for one or two degree values between 0 and 100
 // ***** Maybe a slider later? Start with input boxes.
 // ***** Need degree adjuster up top, one adjuster for all values
-// ***** Change sample based on hex value
+// ***** if hex value contains incorrect character remove
+// ***** add check for incorrect hex inputs
 
 const colorDisplay = document.querySelector(".selection-display");
 
@@ -22,7 +23,9 @@ redInput.addEventListener("change", (e) => handleColorChange(e));
 blueInput.addEventListener("change", (e) => handleColorChange(e));
 greenInput.addEventListener("change", (e) => handleColorChange(e));
 opacityInput.addEventListener("change", (e) => handleColorChange(e));
-hexInput.addEventListener("change", (e) => handleHexChange(e.target.value));
+hexInput.addEventListener("change", (e) =>
+  handleHexChange(e.target.value.slice(1))
+);
 gradientList.addEventListener("change", (e) => handleGradientChange(e));
 
 redInput.addEventListener("keyup", (e) => handleColorChange(e));
@@ -72,7 +75,7 @@ function handleHexChange(value) {
   let numValArr;
   if (!!value.match(/[^0-9a-fA-F]+/gm)) {
     numValArr = [0, 0, 0];
-    hexInput.value = "000000";
+    hexInput.value = "#000000";
   } else {
     if (value.length < 6) {
       value = value.padStart(6, "0");
@@ -83,10 +86,11 @@ function handleHexChange(value) {
   red = redInput.value = numValArr[0];
   green = greenInput.value = numValArr[1];
   blue = blueInput.value = numValArr[2];
-  // debugger;
+
   colorDisplay.style.background = `rgba(${red}, ${green}, ${blue}, ${opacity})`;
   currentColor.firstElementChild.style.background = `rgba(${red}, ${green}, ${blue}, ${opacity})`;
   currentColor.getElementsByTagName("input")[0].value = `#${value}`;
+  hexInput.value = `#${value}`;
 }
 
 function handleEmptyDeselection(e) {
@@ -98,17 +102,16 @@ function handleEmptyDeselection(e) {
 
 function handleGradientChange(e) {
   console.log(e.target.value);
-  debugger;
+  // debugger;
   colorDisplay.style.background = `${e.target.value}-gradient(0deg, rgba(${red}, ${green}, ${blue}, ${opacity}), rgba(${red}, ${green}, ${blue}, ${opacity}))`;
 }
 
 // ***** List section
 const colorList = document.querySelector(".color-list");
-const colors = document.getElementsByClassName("color");
-let currentColor = colors[0];
-currentColor.children[0].style.backgroundColor = "#00ff00";
-currentColor.addEventListener("click", (e) => handleColorSelection(e));
-currentColor.lastElementChild.addEventListener("click", (e) => removeColor(e));
+addNewColor(null, "#0000ff");
+let currentColor = document.getElementsByClassName("color")[0];
+colorDisplay.style.backgroundColor = "#00ff";
+addNewColor(null, "#ff0000");
 
 function handleColorSelection(e) {
   currentColor.classList.remove("selected-color");
@@ -118,30 +121,36 @@ function handleColorSelection(e) {
     currentColor = e.target.parentElement;
   }
   currentColor.classList.add("selected-color");
-
   let hexColor = currentColor.children[2].value.slice(1);
   hexInput.value = hexColor;
   opacityInput.value = currentColor.dataset.opacity;
+
   handleHexChange(hexColor);
 }
 
 const addColorButton = document.querySelector(".add-color-button");
 addColorButton.addEventListener("click", addNewColor);
 
-function addNewColor() {
+function addNewColor(e, color = "#00ff00") {
   const newItem = document.createElement("li");
   newItem.classList.add("color");
   newItem.setAttribute("data-opacity", "1");
 
   const span = document.createElement("span");
   span.classList.add("color-sample");
+  span.style.backgroundColor = color;
 
   const h3 = document.createElement("h3");
   h3.innerText = "Color Sample 1";
 
   const input = document.createElement("input");
   input.setAttribute("name", "color-input");
-  input.setAttribute("value", "#000000");
+  input.setAttribute("type", "text");
+  input.setAttribute("value", color);
+  input.setAttribute("maxLength", "7");
+  input.addEventListener("change", (e) => {
+    return handleHexChange(e.target.value.slice(1));
+  });
 
   const button = document.createElement("button");
   button.classList.add("delete-color-button");
