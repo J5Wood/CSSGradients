@@ -3,6 +3,7 @@
 // ***** Each list item needs to have option for one or two degree values between 0 and 100
 // ***** Maybe a slider later? Start with input boxes.
 // ***** Need degree adjuster up top, one adjuster for all values
+// ***** Change sample based on hex value
 
 const colorDisplay = document.querySelector(".selection-display");
 
@@ -82,7 +83,8 @@ function handleHexChange(value) {
   red = redInput.value = numValArr[0];
   green = greenInput.value = numValArr[1];
   blue = blueInput.value = numValArr[2];
-
+  // debugger;
+  colorDisplay.style.background = `rgba(${red}, ${green}, ${blue}, ${opacity})`;
   currentColor.firstElementChild.style.background = `rgba(${red}, ${green}, ${blue}, ${opacity})`;
   currentColor.getElementsByTagName("input")[0].value = `#${value}`;
 }
