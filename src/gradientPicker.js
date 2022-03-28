@@ -145,5 +145,19 @@ function removeColor(e) {
   e.stopPropagation();
 }
 
-addNewColor();
+function addInitialColors() {
+  addNewColor();
+  redInput.value = 255;
+  blueInput.value = 0;
+  greenInput.value = 0;
+  hexInput.value = "#ff0000";
+  addNewColor();
+  redInput.value = 0;
+  greenInput.value = 255;
+  blueInput.value = 0;
+  hexInput.value = "#00ff00";
+}
+
+addInitialColors();
 let currentColor = document.getElementsByClassName("color")[0];
+currentColor.classList.add("selected-color");
