@@ -129,7 +129,6 @@ const addColorButton = document.querySelector(".add-color-button");
 addColorButton.addEventListener("click", addNewColor);
 
 function addNewColor() {
-  // debugger;
   const colorObj = {
     red: redInput.value,
     green: greenInput.value,

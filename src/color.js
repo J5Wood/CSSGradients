@@ -11,11 +11,11 @@ class Color {
   render() {
     const newItem = document.createElement("li");
     newItem.classList.add("color");
-    newItem.setAttribute("data-opacity", "1");
+    newItem.setAttribute("data-opacity", this.opacity);
 
     const span = document.createElement("span");
     span.classList.add("color-sample");
-    span.style.backgroundColor = this.hex;
+    span.style.backgroundColor = `rgba(${this.red}, ${this.green}, ${this.blue}, ${this.opacity})`;
 
     const h3 = document.createElement("h3");
     h3.innerText = "Color Sample 1";
