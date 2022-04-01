@@ -1,6 +1,5 @@
 class Color {
   constructor({ red, green, blue, opacity, hex }) {
-    // this.degrees = degrees
     this.red = red;
     this.green = green;
     this.blue = blue;

@@ -2,7 +2,6 @@
 
 // ***** Each list item needs to have option for one or two degree values between 0 and 100
 // ***** Maybe a slider later? Start with input boxes.
-// ***** Need degree adjuster up top, one adjuster for all values
 // ***** if hex value contains incorrect character remove
 // ***** add check for incorrect hex inputs)
 
@@ -12,6 +11,7 @@ const blueInput = document.querySelector(".blue");
 const greenInput = document.querySelector(".green");
 const opacityInput = document.querySelector(".opacity-number");
 const degreeInput = document.querySelector(".degrees");
+const colorDisplay = document.querySelector(".selection-display");
 
 let red = 0;
 let green = 255;
@@ -59,8 +59,7 @@ function handleColorChange(e) {
   }
   hexInput.value = `#${hexValArr.join("")}`;
 
-  // colorDisplay.style.background =
-  //   currentColor.firstElementChild.style.background = `rgba(${red}, ${green}, ${blue}, ${opacity})`;
+  currentColor.firstElementChild.style.background = `rgba(${red}, ${green}, ${blue}, ${opacity})`;
   currentColor.setAttribute("data-opacity", `${opacity}`);
 
   currentColor.getElementsByTagName("input")[0].value = `#${hexValArr.join(
@@ -86,7 +85,6 @@ function handleHexChange(value) {
   green = greenInput.value = numValArr[1];
   blue = blueInput.value = numValArr[2];
 
-  // colorDisplay.style.background = `rgba(${red}, ${green}, ${blue}, ${opacity})`;
   currentColor.firstElementChild.style.background = `rgba(${red}, ${green}, ${blue}, ${opacity})`;
   currentColor.getElementsByTagName("input")[0].value = `#${value}`;
   hexInput.value = `#${value}`;
@@ -99,12 +97,6 @@ function handleEmptyDeselection(e) {
     handleColorChange(e);
   }
 }
-
-// function handleGradientChange(e) {
-//   console.log(e.target.value);
-//   // debugger;
-//   colorDisplay.style.background = `${e.target.value}-gradient(0deg, rgba(${red}, ${green}, ${blue}, ${opacity}), rgba(${red}, ${green}, ${blue}, ${opacity}))`;
-// }
 
 // ***** List section
 
@@ -156,6 +148,7 @@ function addInitialColors() {
   greenInput.value = 255;
   blueInput.value = 0;
   hexInput.value = "#00ff00";
+  updateColorDisplay();
 }
 
 addInitialColors();
@@ -164,22 +157,23 @@ currentColor.classList.add("selected-color");
 
 // ***** Color Display Section
 
-const colorDisplay = document.querySelector(".selection-display");
-
 function updateColorDisplay() {
   const colors = [...document.getElementsByClassName("color")];
 
   const gradientList = colors.map((color) => {
     let rgb = color.children[0].style.backgroundColor;
 
-    let rgba =
-      rgb.slice(0, 3) +
-      "a" +
-      rgb.slice(3, rgb.length - 1) +
-      `, ${color.dataset.opacity}` +
-      rgb.slice(rgb.length - 1);
-    return rgba;
+    if (rgb[3] !== "a") {
+      rgb =
+        rgb.slice(0, 3) +
+        "a" +
+        rgb.slice(3, rgb.length - 1) +
+        `, ${color.dataset.opacity}` +
+        rgb.slice(rgb.length - 1);
+    }
+    return rgb;
   });
+
   colorDisplay.style.background = `linear-gradient( ${
     degreeInput.value
   }deg, ${gradientList.join(", ")})`;
