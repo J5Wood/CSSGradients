@@ -36,6 +36,9 @@ blueInput.addEventListener("blur", (e) => handleEmptyDeselection(e));
 greenInput.addEventListener("blur", (e) => handleEmptyDeselection(e));
 opacityInput.addEventListener("blur", (e) => handleEmptyDeselection(e));
 
+degreeInput.addEventListener("change", (e) => updateColorDisplay());
+degreeInput.addEventListener("keyup", (e) => updateColorDisplay());
+
 function handleColorChange(e) {
   if (e.target.value > 255) e.target.value = 255;
   if (e.target.value < 0 || e.target.value.match(/[^0-9.]/)) e.target.value = 0;
@@ -173,7 +176,6 @@ function updateColorDisplay() {
     }
     return rgb;
   });
-
   colorDisplay.style.background = `linear-gradient( ${
     degreeInput.value
   }deg, ${gradientList.join(", ")})`;
