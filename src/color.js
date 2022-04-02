@@ -1,20 +1,22 @@
 class Color {
-  constructor({ red, green, blue, opacity, hex }) {
+  constructor({ red, green, blue, opacity, hex, percent }) {
     this.red = red;
     this.green = green;
     this.blue = blue;
     this.opacity = opacity;
     this.hex = hex;
+    this.percent = percent;
   }
 
   render() {
     const newItem = document.createElement("li");
     newItem.classList.add("color");
     newItem.setAttribute("data-opacity", this.opacity);
+    newItem.setAttribute("data-percent", this.percent);
 
     const span = document.createElement("span");
     span.classList.add("color-sample");
-    span.style.backgroundColor = `rgba(${this.red}, ${this.green}, ${this.blue}, ${this.opacity})`;
+    span.style.backgroundColor = `rgba(${this.red}, ${this.green}, ${this.blue}, ${this.opacity}) `;
 
     const h3 = document.createElement("h3");
     h3.innerText = "Color Sample 1";

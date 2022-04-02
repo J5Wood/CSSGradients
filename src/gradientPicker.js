@@ -11,6 +11,7 @@ const blueInput = document.querySelector(".blue");
 const greenInput = document.querySelector(".green");
 const opacityInput = document.querySelector(".opacity-number");
 const degreeInput = document.querySelector(".degrees");
+const percentInput = document.querySelector(".percentage");
 const colorDisplay = document.querySelector(".selection-display");
 
 let red = 0;
@@ -22,6 +23,7 @@ redInput.addEventListener("change", (e) => handleColorChange(e));
 blueInput.addEventListener("change", (e) => handleColorChange(e));
 greenInput.addEventListener("change", (e) => handleColorChange(e));
 opacityInput.addEventListener("change", (e) => handleColorChange(e));
+percentInput.addEventListener("change", (e) => handleColorChange(e));
 hexInput.addEventListener("change", (e) =>
   handleHexChange(e.target.value.slice(1))
 );
@@ -30,6 +32,7 @@ redInput.addEventListener("keyup", (e) => handleColorChange(e));
 blueInput.addEventListener("keyup", (e) => handleColorChange(e));
 greenInput.addEventListener("keyup", (e) => handleColorChange(e));
 opacityInput.addEventListener("keyup", (e) => handleColorChange(e));
+percentInput.addEventListener("keyup", (e) => handleColorChange(e));
 
 redInput.addEventListener("blur", (e) => handleEmptyDeselection(e));
 blueInput.addEventListener("blur", (e) => handleEmptyDeselection(e));
@@ -48,9 +51,15 @@ function handleColorChange(e) {
     blue = e.target.value;
   } else if (e.target.name === "green") {
     green = e.target.value;
+  } else if (e.target.name === "percentage") {
+    // ***** Added percent to li and dataset.
+    // ***** add to color display update
+
+    currentColor.dataset.percent = e.target.value;
   } else {
     opacity = e.target.value;
   }
+
   const hexValArr = [
     parseInt(red).toString(16),
     parseInt(green).toString(16),
@@ -130,6 +139,7 @@ function addNewColor() {
     blue: blueInput.value,
     opacity: opacityInput.value,
     hex: hexInput.value,
+    percent: percentInput.value,
   };
   const newColor = new Color(colorObj);
   colorList.insertBefore(newColor.render(), colorList.lastElementChild);
