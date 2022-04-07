@@ -4,7 +4,7 @@
 // ***** Maybe a slider later? Start with input boxes.
 // ***** if hex value contains incorrect character remove
 // ***** add check for incorrect hex inputs)
-
+// ***** Refactor into different modules
 // ***** Display lightens when most input boxes are selected. Doesn't seem to be associated with any JS events
 
 const hexInput = document.querySelector(".hex-value");
@@ -45,6 +45,7 @@ degreeInput.addEventListener("change", (e) => updateColorDisplay());
 degreeInput.addEventListener("keyup", (e) => updateColorDisplay());
 
 function handleColorChange(e) {
+  // ***** Handling number checking in a couple different spots, clean up a little?
   if (e.target.value > 255) e.target.value = 255;
   if (e.target.value < 0 || e.target.value.match(/[^0-9.]/)) e.target.value = 0;
   if (e.target.name === "red") {
@@ -56,6 +57,7 @@ function handleColorChange(e) {
   } else if (e.target.name === "percentage") {
     currentColor.dataset.percent = e.target.value;
   } else {
+    if (e.target.value > 1) e.target.value = 1;
     opacity = e.target.value;
   }
 
@@ -147,6 +149,7 @@ function addNewColor() {
 function removeColor(e) {
   e.target.parentElement.remove();
   e.stopPropagation();
+  updateColorDisplay();
 }
 
 function addInitialColors() {
