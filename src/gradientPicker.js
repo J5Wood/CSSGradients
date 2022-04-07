@@ -124,7 +124,7 @@ function handleColorSelection(e) {
   let hexColor = currentColor.children[2].value.slice(1);
   hexInput.value = hexColor;
   opacityInput.value = currentColor.dataset.opacity;
-
+  percentInput.value = currentColor.dataset.percent;
   handleHexChange(hexColor);
 }
 
