@@ -52,9 +52,6 @@ function handleColorChange(e) {
   } else if (e.target.name === "green") {
     green = e.target.value;
   } else if (e.target.name === "percentage") {
-    // ***** Added percent to li and dataset.
-    // ***** add to color display update
-
     currentColor.dataset.percent = e.target.value;
   } else {
     opacity = e.target.value;
@@ -156,6 +153,7 @@ function addInitialColors() {
   blueInput.value = 0;
   greenInput.value = 0;
   hexInput.value = "#ff0000";
+  updateColorDisplay();
   addNewColor();
   redInput.value = 0;
   greenInput.value = 255;
@@ -184,6 +182,7 @@ function updateColorDisplay() {
         `, ${color.dataset.opacity}` +
         rgb.slice(rgb.length - 1);
     }
+    rgb += ` ${color.dataset.percent}%`;
     return rgb;
   });
   colorDisplay.style.background = `linear-gradient( ${
