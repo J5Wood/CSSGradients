@@ -5,6 +5,8 @@
 // ***** if hex value contains incorrect character remove
 // ***** add check for incorrect hex inputs)
 
+// ***** Display lightens when most input boxes are selected. Doesn't seem to be associated with any JS events
+
 const hexInput = document.querySelector(".hex-value");
 const redInput = document.querySelector(".red");
 const blueInput = document.querySelector(".blue");
@@ -153,12 +155,14 @@ function addInitialColors() {
   blueInput.value = 0;
   greenInput.value = 0;
   hexInput.value = "#ff0000";
+  percentInput.value = "100";
   updateColorDisplay();
   addNewColor();
   redInput.value = 0;
   greenInput.value = 255;
   blueInput.value = 0;
   hexInput.value = "#00ff00";
+  percentInput.value = "25";
   updateColorDisplay();
 }
 
