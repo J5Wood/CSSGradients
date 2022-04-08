@@ -2,8 +2,6 @@
 
 // ***** Each list item needs to have option for one or two degree values between 0 and 100
 // ***** Maybe a slider later? Start with input boxes.
-// ***** if hex value contains incorrect character remove
-// ***** add check for incorrect hex inputs)
 // ***** Refactor into different modules
 // ***** Display lightens when most input boxes are selected. Doesn't seem to be associated with any JS events
 
@@ -84,16 +82,15 @@ function handleColorChange(e) {
 function handleHexChange(value) {
   opacity = opacityInput.value;
   let numValArr;
-  if (!!value.match(/[^0-9a-fA-F]+/gm)) {
-    numValArr = [0, 0, 0];
-    hexInput.value = "#000000";
-  } else {
-    if (value.length < 6) {
-      value = value.padStart(6, "0");
-    }
-    let numArr = value.split(/(.{2})/gm).filter((val) => !!val === true);
-    numValArr = numArr.map((num) => parseInt(num, 16));
+  value = value.replace(/[^0-9a-fA-F]/gm, "0");
+
+  if (value.length < 6) {
+    value = value.padStart(6, "0");
   }
+
+  let numArr = value.split(/(.{2})/gm).filter((val) => !!val === true);
+  numValArr = numArr.map((num) => parseInt(num, 16));
+
   red = redInput.value = numValArr[0];
   green = greenInput.value = numValArr[1];
   blue = blueInput.value = numValArr[2];
@@ -177,6 +174,7 @@ currentColor.classList.add("selected-color");
 
 function updateColorDisplay() {
   const colors = [...document.getElementsByClassName("color")];
+  colors.sort((a, b) => a.dataset.percent - b.dataset.percent);
 
   const gradientList = colors.map((color) => {
     let rgb = color.children[0].style.backgroundColor;
