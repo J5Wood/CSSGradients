@@ -1,9 +1,8 @@
 // ***** Display and input section
 
-// ***** Each list item needs to have option for one or two degree values between 0 and 100
 // ***** Maybe a slider later? Start with input boxes.
 // ***** Refactor into different modules
-// ***** Display lightens when most input boxes are selected. Doesn't seem to be associated with any JS events
+// ***** degree and percent don't return to 0 on empty deselect
 
 const hexInput = document.querySelector(".hex-value");
 const redInput = document.querySelector(".red");
