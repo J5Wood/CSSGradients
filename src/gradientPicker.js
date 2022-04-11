@@ -2,7 +2,6 @@
 
 // ***** Maybe a slider later? Start with input boxes.
 // ***** Refactor into different modules
-// ***** degree and percent don't return to 0 on empty deselect
 
 const hexInput = document.querySelector(".hex-value");
 const redInput = document.querySelector(".red");
@@ -37,6 +36,8 @@ redInput.addEventListener("blur", (e) => handleEmptyDeselection(e));
 blueInput.addEventListener("blur", (e) => handleEmptyDeselection(e));
 greenInput.addEventListener("blur", (e) => handleEmptyDeselection(e));
 opacityInput.addEventListener("blur", (e) => handleEmptyDeselection(e));
+degreeInput.addEventListener("blur", (e) => handleEmptyDeselection(e));
+percentInput.addEventListener("blur", (e) => handleEmptyDeselection(e));
 
 degreeInput.addEventListener("change", (e) => updateColorDisplay());
 degreeInput.addEventListener("keyup", (e) => updateColorDisplay());
@@ -103,7 +104,11 @@ function handleHexChange(value) {
 function handleEmptyDeselection(e) {
   if (!e.target.value) {
     e.target.value = "0";
-    handleColorChange(e);
+    if (e.target.id === "degrees") {
+      updateColorDisplay();
+    } else {
+      handleColorChange(e);
+    }
   }
 }
 
