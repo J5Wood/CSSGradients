@@ -2,6 +2,7 @@
 
 // ***** Maybe a slider later? Start with input boxes.
 // ***** Refactor into different modules
+// ***** Percentage can go above 100%
 
 const hexInput = document.querySelector(".hex-value");
 const redInput = document.querySelector(".red");
