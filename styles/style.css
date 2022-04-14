@@ -46,30 +46,22 @@ body {
 }
 
 .input-group {
-  display: grid;
-  grid-template-columns: 80% 20%;
-  grid-template-rows: 1fr 1fr;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  gap: 5px;
   background-color: rgb(255, 255, 255);
-  padding: 2px;
+  padding: 4px;
   border: 2px outset rgba(163, 163, 163, .6);
   border-top: 1px solid rgba(0, 0, 0, 0.2);
   border-left: 1px solid rgba(0, 0, 0, 0.33);
   border-radius: 5px;
 }
 
+
 .input-group label {
-  grid-column: span 2;
+  width: 100%;
   line-height: 1.5em;
-}
-
-.input-group input{
-  display: inline;
-  line-height: 1.5em;
-  justify-self: stretch;
-}
-
-.input-icon {
-  display: inline;
 }
 
 .color-list {
