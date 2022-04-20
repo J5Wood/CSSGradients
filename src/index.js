@@ -2,7 +2,6 @@
 
 // ***** Maybe a slider later? Start with input boxes.
 // ***** Refactor into different modules
-// ***** Percentage can go above 100%
 
 const hexInput = document.querySelector(".hex-value");
 const redInput = document.querySelector(".red");
@@ -146,6 +145,7 @@ function addNewColor() {
   };
   const newColor = new Color(colorObj);
   colorList.insertBefore(newColor.render(), colorList.lastElementChild);
+  updateColorDisplay();
 }
 
 function removeColor(e) {
@@ -195,6 +195,9 @@ function updateColorDisplay() {
     rgb += ` ${color.dataset.percent}%`;
     return rgb;
   });
+  if (gradientList.length === 1) {
+    gradientList[1] = gradientList[0];
+  }
   colorDisplay.style.background = `linear-gradient( ${
     degreeInput.value
   }deg, ${gradientList.join(", ")})`;
