@@ -53,7 +53,7 @@ function handleColorChange(e) {
   } else if (e.target.name === "green") {
     green = e.target.value;
   } else if (e.target.name === "percentage") {
-    currentColor.dataset.percent = e.target.value;
+    colorList.currentColor.dataset.percent = e.target.value;
   } else {
     if (e.target.value > 1) e.target.value = 1;
     opacity = e.target.value;
@@ -70,12 +70,12 @@ function handleColorChange(e) {
   }
   hexInput.value = `#${hexValArr.join("")}`;
 
-  currentColor.firstElementChild.style.background = `rgba(${red}, ${green}, ${blue}, ${opacity})`;
-  currentColor.setAttribute("data-opacity", `${opacity}`);
+  colorList.currentColor.firstElementChild.style.background = `rgba(${red}, ${green}, ${blue}, ${opacity})`;
+  colorList.currentColor.setAttribute("data-opacity", `${opacity}`);
 
-  currentColor.getElementsByTagName("input")[0].value = `#${hexValArr.join(
-    ""
-  )}`;
+  colorList.currentColor.getElementsByTagName(
+    "input"
+  )[0].value = `#${hexValArr.join("")}`;
   updateColorDisplay();
 }
 
@@ -94,9 +94,8 @@ function handleHexChange(value) {
   red = redInput.value = numValArr[0];
   green = greenInput.value = numValArr[1];
   blue = blueInput.value = numValArr[2];
-
-  currentColor.firstElementChild.style.background = `rgba(${red}, ${green}, ${blue}, ${opacity})`;
-  currentColor.getElementsByTagName("input")[0].value = `#${value}`;
+  colorList.currentColor.firstElementChild.style.background = `rgba(${red}, ${green}, ${blue}, ${opacity})`;
+  colorList.currentColor.getElementsByTagName("input")[0].value = `#${value}`;
   hexInput.value = `#${value}`;
   updateColorDisplay();
 }
@@ -111,69 +110,6 @@ function handleEmptyDeselection(e) {
     }
   }
 }
-
-// ***** List section
-
-const colorList = document.querySelector(".color-list");
-
-function handleColorSelection(e) {
-  currentColor.classList.remove("selected-color");
-  if (e.target.className === "color") {
-    currentColor = e.target;
-  } else {
-    currentColor = e.target.parentElement;
-  }
-  currentColor.classList.add("selected-color");
-  let hexColor = currentColor.children[2].value.slice(1);
-  hexInput.value = hexColor;
-  opacityInput.value = currentColor.dataset.opacity;
-  percentInput.value = currentColor.dataset.percent;
-  handleHexChange(hexColor);
-}
-
-const addColorButton = document.querySelector(".add-color-button");
-addColorButton.addEventListener("click", addNewColor);
-
-function addNewColor() {
-  const colorObj = {
-    red: redInput.value,
-    green: greenInput.value,
-    blue: blueInput.value,
-    opacity: opacityInput.value,
-    hex: hexInput.value,
-    percent: percentInput.value,
-  };
-  const newColor = new Color(colorObj);
-  colorList.insertBefore(newColor.render(), colorList.lastElementChild);
-  updateColorDisplay();
-}
-
-function removeColor(e) {
-  e.target.parentElement.remove();
-  e.stopPropagation();
-  updateColorDisplay();
-}
-
-function addInitialColors() {
-  addNewColor();
-  redInput.value = 255;
-  blueInput.value = 0;
-  greenInput.value = 0;
-  hexInput.value = "#ff0000";
-  percentInput.value = "100";
-  updateColorDisplay();
-  addNewColor();
-  redInput.value = 0;
-  greenInput.value = 255;
-  blueInput.value = 0;
-  hexInput.value = "#00ff00";
-  percentInput.value = "25";
-  updateColorDisplay();
-}
-
-addInitialColors();
-let currentColor = document.getElementsByClassName("color")[0];
-currentColor.classList.add("selected-color");
 
 // ***** Color Display Section
 
@@ -202,3 +138,5 @@ function updateColorDisplay() {
     degreeInput.value
   }deg, ${gradientList.join(", ")})`;
 }
+
+const colorList = new ColorList();

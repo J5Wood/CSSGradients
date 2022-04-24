@@ -1,11 +1,22 @@
 class Color {
-  constructor({ red, green, blue, opacity, hex, percent }) {
+  constructor({
+    red,
+    green,
+    blue,
+    opacity,
+    hex,
+    percent,
+    selectColor,
+    removeColor,
+  }) {
     this.red = red;
     this.green = green;
     this.blue = blue;
     this.opacity = opacity;
     this.hex = hex;
     this.percent = percent;
+    this.selectColor = selectColor;
+    this.removeColor = removeColor;
   }
 
   render() {
@@ -34,14 +45,13 @@ class Color {
     button.classList.add("delete-color-button");
     button.innerText = "X";
 
-    button.addEventListener("click", (e) => removeColor(e));
+    button.addEventListener("click", (e) => this.removeColor(e));
 
     newItem.appendChild(span);
     newItem.appendChild(h3);
     newItem.appendChild(input);
     newItem.appendChild(button);
-
-    newItem.addEventListener("click", (e) => handleColorSelection(e));
+    newItem.addEventListener("click", (e) => this.selectColor(e));
     return newItem;
   }
 }
