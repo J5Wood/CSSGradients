@@ -11,6 +11,7 @@ const opacityInput = document.querySelector(".opacity-number");
 const degreeInput = document.querySelector(".degrees");
 const percentInput = document.querySelector(".percentage");
 const colorDisplay = document.querySelector(".selection-display");
+const gradientType = document.querySelector("#gradients");
 
 let red = 0;
 let green = 255;
@@ -41,6 +42,8 @@ percentInput.addEventListener("blur", (e) => handleEmptyDeselection(e));
 
 degreeInput.addEventListener("change", (e) => updateColorDisplay());
 degreeInput.addEventListener("keyup", (e) => updateColorDisplay());
+
+gradientType.addEventListener("change", () => updateColorDisplay());
 
 function handleColorChange(e) {
   // ***** Handling number checking in a couple different spots, clean up a little?
@@ -114,6 +117,13 @@ function handleEmptyDeselection(e) {
 // ***** Color Display Section
 
 function updateColorDisplay() {
+  let type = gradientType.value;
+  if (type === "radial") {
+    type += "-gradient(circle,";
+  } else {
+    type += `-gradient( ${degreeInput.value}deg, `;
+  }
+
   const colors = [...document.getElementsByClassName("color")];
   colors.sort((a, b) => a.dataset.percent - b.dataset.percent);
 
@@ -134,9 +144,7 @@ function updateColorDisplay() {
   if (gradientList.length === 1) {
     gradientList[1] = gradientList[0];
   }
-  colorDisplay.style.background = `linear-gradient( ${
-    degreeInput.value
-  }deg, ${gradientList.join(", ")})`;
+  colorDisplay.style.background = `${type} ${gradientList.join(", ")})`;
 }
 
 const colorList = new ColorList();
