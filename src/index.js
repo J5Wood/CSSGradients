@@ -25,6 +25,7 @@ const unitsOne = document.querySelector("#units-one");
 const lengthOne = unitsOne.previousElementSibling;
 const unitsTwo = document.querySelector("#units-two");
 const lengthTwo = unitsTwo.previousElementSibling;
+const size = document.querySelector(".size");
 
 let red = 0;
 let green = 255;
@@ -160,15 +161,42 @@ function updateColorDisplay() {
     } else if (positionStyle === "percentage") {
       position = `at ${percentageOne.value}% ${percentageTwo.value}%`;
     } else if (positionStyle === "length") {
-      debugger;
-      position = `at ${lengthOne.value + unitsOne.value} ${
-        lengthTwo.value + unitsTwo.value
-      }`;
-    } else if (positionStyle === "global") {
-      debugger;
+      let [length, height] = [lengthOne.value, lengthTwo.value];
+
+      // Correct vh units for height of display, not entire window.
+      // ***** weird positioning results with vmax, when not adjusting for
+      if (
+        unitsOne.value === "vh" ||
+        (unitsOne.value === "vmax" &&
+          colorDisplay.offsetHeight > colorDisplay.offsetWidth) ||
+        (unitsOne.value === "vmin" &&
+          colorDisplay.offsetHeight < colorDisplay.offsetWidth)
+      ) {
+        let displayHeight = colorDisplay.offsetHeight;
+        let correctedOffset = parseInt(length) * 0.01 * parseInt(displayHeight);
+        length = `${correctedOffset}px`;
+      } else {
+        length += unitsOne.value;
+      }
+      if (
+        unitsTwo.value === "vh" ||
+        (unitsTwo.value === "vmax" &&
+          colorDisplay.offsetHeight > colorDisplay.offsetWidth) ||
+        (unitsTwo.value === "vmin" &&
+          colorDisplay.offsetHeight < colorDisplay.offsetWidth)
+      ) {
+        let displayHeight = colorDisplay.offsetHeight;
+        let correctedOffset = parseInt(height) * 0.01 * parseInt(displayHeight);
+        height = `${correctedOffset}px`;
+      } else {
+        height += unitsTwo.value;
+      }
+
+      position = `at ${length} ${height}`;
+    } else if (positionStyle === "size") {
+      position = size.value;
     }
 
-    debugger;
     type = `${type}-gradient(${shape} ${position},`;
   } else {
     radialOptions.style.display = "none";
@@ -196,7 +224,6 @@ function updateColorDisplay() {
   if (gradientList.length === 1) {
     gradientList[1] = gradientList[0];
   }
-  debugger;
   colorDisplay.style.background = `${type} ${gradientList.join(", ")})`;
 }
 
