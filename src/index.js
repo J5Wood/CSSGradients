@@ -3,6 +3,8 @@
 // ***** Maybe a slider later? Start with input boxes.
 // ***** Refactor into different modules
 
+// ***** Add dynamic input for background position on radial gradients
+
 const hexInput = document.querySelector(".hex-value");
 const redInput = document.querySelector(".red");
 const blueInput = document.querySelector(".blue");
@@ -12,7 +14,11 @@ const degreeInput = document.querySelector(".degrees");
 const percentInput = document.querySelector(".percentage");
 const colorDisplay = document.querySelector(".selection-display");
 const gradientType = document.querySelector("#gradients");
-
+const gradientPosition = document.getElementsByName("position");
+const linearOptions = document.querySelector(".linear-options");
+const radialOptions = document.querySelector(".radial-options");
+const radialShapes = document.getElementsByName("shape");
+const keywordPosition = document.querySelector(".keyword-position");
 let red = 0;
 let green = 255;
 let blue = 0;
@@ -44,6 +50,14 @@ degreeInput.addEventListener("change", (e) => updateColorDisplay());
 degreeInput.addEventListener("keyup", (e) => updateColorDisplay());
 
 gradientType.addEventListener("change", () => updateColorDisplay());
+
+for (let option of radialShapes) {
+  option.addEventListener("change", () => updateColorDisplay());
+}
+for (let option of keywordPosition) {
+  option / addEventListener("change", () => updateColorDisplay());
+}
+// gradientPosition.addEventListener("change", () => updateColorDisplay());
 
 function handleColorChange(e) {
   // ***** Handling number checking in a couple different spots, clean up a little?
@@ -117,10 +131,39 @@ function handleEmptyDeselection(e) {
 // ***** Color Display Section
 
 function updateColorDisplay() {
+  let positionStyle, position, shape;
   let type = gradientType.value;
+
   if (type === "radial") {
-    type += "-gradient(circle,";
+    linearOptions.style.display = "none";
+    radialOptions.style.display = "block";
+
+    for (let option of gradientPosition) {
+      if (option.checked) {
+        positionStyle = option.value;
+      }
+    }
+    for (let option of radialShapes) {
+      if (option.checked) {
+        shape = option.value;
+      }
+    }
+
+    if (positionStyle === "keyword") {
+      position = `at ${keywordPosition.value}`;
+    } else if (positionStyle === "percentage") {
+      debugger;
+    } else if (positionStyle === "length") {
+      debugger;
+    } else if (positionStyle === "global") {
+      debugger;
+    }
+
+    debugger;
+    type = `${type}-gradient(${shape} ${position},`;
   } else {
+    radialOptions.style.display = "none";
+    linearOptions.style.display = "block";
     type += `-gradient( ${degreeInput.value}deg, `;
   }
 
@@ -144,6 +187,7 @@ function updateColorDisplay() {
   if (gradientList.length === 1) {
     gradientList[1] = gradientList[0];
   }
+  debugger;
   colorDisplay.style.background = `${type} ${gradientList.join(", ")})`;
 }
 
