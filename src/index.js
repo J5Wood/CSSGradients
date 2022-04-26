@@ -19,6 +19,9 @@ const linearOptions = document.querySelector(".linear-options");
 const radialOptions = document.querySelector(".radial-options");
 const radialShapes = document.getElementsByName("shape");
 const keywordPosition = document.querySelector(".keyword-position");
+const percentageOne = document.querySelector("#percentage-one");
+const percentageTwo = document.querySelector("#percentage-two");
+
 let red = 0;
 let green = 255;
 let blue = 0;
@@ -148,11 +151,10 @@ function updateColorDisplay() {
         shape = option.value;
       }
     }
-
     if (positionStyle === "keyword") {
       position = `at ${keywordPosition.value}`;
     } else if (positionStyle === "percentage") {
-      debugger;
+      position = `at ${percentageOne.value}% ${percentageTwo.value}%`;
     } else if (positionStyle === "length") {
       debugger;
     } else if (positionStyle === "global") {
