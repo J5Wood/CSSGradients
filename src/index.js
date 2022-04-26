@@ -21,6 +21,10 @@ const radialShapes = document.getElementsByName("shape");
 const keywordPosition = document.querySelector(".keyword-position");
 const percentageOne = document.querySelector("#percentage-one");
 const percentageTwo = document.querySelector("#percentage-two");
+const unitsOne = document.querySelector("#units-one");
+const lengthOne = unitsOne.previousElementSibling;
+const unitsTwo = document.querySelector("#units-two");
+const lengthTwo = unitsTwo.previousElementSibling;
 
 let red = 0;
 let green = 255;
@@ -157,6 +161,9 @@ function updateColorDisplay() {
       position = `at ${percentageOne.value}% ${percentageTwo.value}%`;
     } else if (positionStyle === "length") {
       debugger;
+      position = `at ${lengthOne.value + unitsOne.value} ${
+        lengthTwo.value + unitsTwo.value
+      }`;
     } else if (positionStyle === "global") {
       debugger;
     }
