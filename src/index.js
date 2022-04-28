@@ -191,13 +191,10 @@ function updateColorDisplay() {
       } else {
         height += unitsTwo.value;
       }
-
       position = `at ${length} ${height}`;
-    } else if (positionStyle === "size") {
-      position = size.value;
     }
 
-    type = `${type}-gradient(${shape} ${position},`;
+    type = `${type}-gradient(${shape} ${size.value} ${position},`;
   } else {
     radialOptions.style.display = "none";
     linearOptions.style.display = "block";
