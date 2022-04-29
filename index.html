@@ -11,133 +11,131 @@
       <main class="main-body">
         <h1>CSS Gradient Tester</h1>
         <div class="selection-display"></div>
-        <div class="color-selection">
 
-            <span class="input-group">
-                <label for="gradients">Gradient Type: </label>
-                <select id="gradients" class="gradient-type">
-                    <option value="radial">Radial Gradient</option>
-                    <option value="linear">Linear Gradient</option>
+            <div class="body-columns">
 
-                </select>
-            </span>
 
-            <span class="input-group linear-options">
-                <label for="degrees">Degrees: </label>
-                <input type="number" id="degrees" step="1" min="0" max="359" value="90" class="degrees">°
-            </span>
+            <!-- <div class="input-selection"> -->
 
-            <span class="input-group radial-options">
-                <label for="shape">Shape: </label>
+                <span class="gradient-type">
+                    <label for="gradients">Gradient Type: </label>
                 </br>
-                <input type="radio" name="shape" id="circle" value="circle" checked="true">
-                <label for="circle">Circle</label>
-                <input type="radio" name="shape" id="ellipse" value="ellipse">
-                <label for="ellipse">Ellipse</label>
-                </br>
-                <label for="size">Sizing:</label>
-                </br>
-                <select class="size">
-                    <option value="farthest-corner">Farthest Corner</option>
-                    <option value="closest-corner">Closest Corner</option>
-                    <option value="farthest-side">Farthest Side</option>
-                    <option value="closest-side">Closest Side</option>
-                </select>
-                </br>
-                <label for="position">Position: </label>
-                </br>
-                <input type="radio" name="position" checked="true" id="keyword" value="keyword">
-                <label for="keyword">Keyword</label>
-                <select id="keyword-position" class="keyword-position">
-                    <option value="center">Center</option>
-                    <option value="top">Top</option>
-                    <option value="bottom">bottom</option>
-                    <option value="left">left</option>
-                    <option value="right">Right</option>
-                </select>
-                </br>
-                <input type="radio" name="position" id="percentage" value="percentage">
-                <label for="percentage">Percentage</label>
-                <input type="number" value="0" min="0" max="100" id="percentage-one">%
-                <input type="number" value="0" min="0" max="100" id="percentage-two">%
-                </br>
+                    <select id="gradients" class="gradient-type">
+                        <option value="radial">Radial Gradient</option>
+                        <option value="linear">Linear Gradient</option>
 
-                <input type="radio" name="position" id="length" value="length">
-                <label for="length">Length: </label>
-                <input type="number" value="0" min="0" max="100">
-                <select id="units-one">
-                    <option value="px">px</option>
-                    <option value="em">em</option>
-                    <option value="rem">rem</option>
-                    <option value="ch">ch</option>
-                    <option value="vw">vw</option>
-                    <option value="vh">vh</option>
-                    <option value="ex">ex</option>
-                    <option value="vmin">vmin</option>
-                    <option value="vmax">vmax</option>
-                    <option value="cm">cm</option>
-                    <option value="mm">mm</option>
-                    <option value="Q">Q</option>
-                    <option value="in">in</option>
-                    <option value="pc">pc</option>
-                    <option value="pt">pt</option>
-                </select>
-                <input type="number" value="0" min="0" max="100">
-                <select id="units-two">
-                    <option value="px">px</option>
-                    <option value="em">em</option>
-                    <option value="rem">rem</option>
-                    <option value="ch">ch</option>
-                    <option value="vw">vw</option>
-                    <option value="vh">vh</option>
-                    <option value="ex">ex</option>
-                    <option value="vmin">vmin</option>
-                    <option value="vmax">vmax</option>
-                    <option value="cm">cm</option>
-                    <option value="mm">mm</option>
-                    <option value="Q">Q</option>
-                    <option value="in">in</option>
-                    <option value="pc">pc</option>
-                    <option value="pt">pt</option>
-                </select>
-                </br>
+                    </select>
+                </span>
 
-            </span>
+                <span class="linear-options">
+                    <label for="degrees">Degrees: </label>
+                    <input type="number" id="degrees" step="1" min="0" max="359" value="90" class="degrees">°
+                </span>
 
-            <span class="input-group ">
-                <label for="hex-value">Hex: </label>
-                <input type="text" name="hex-value" id="hex-value" value="#00ff00" maxlength="7" class="hex-value">
-            </span>
+                <span class="radial-options">
+                    <label for="shape">Shape: </label>
+                    </br>
+                    <input type="radio" name="shape" id="circle" value="circle" checked="true">
+                    <label for="circle">Circle</label>
+                    <input type="radio" name="shape" id="ellipse" value="ellipse">
+                    <label for="ellipse">Ellipse</label>
+                    </br>
+                    <label for="size">Sizing:</label>
+                    </br>
+                    <select class="size">
+                        <option value="farthest-corner">Farthest Corner</option>
+                        <option value="closest-corner">Closest Corner</option>
+                        <option value="farthest-side">Farthest Side</option>
+                        <option value="closest-side">Closest Side</option>
+                    </select>
+                    </br>
+                    <label for="position">Position: </label>
+                    </br>
+                    <input type="radio" name="position" checked="true" id="keyword" value="keyword">
+                    <label for="keyword">Keyword</label>
+                    <select id="keyword-position" class="keyword-position">
+                        <option value="center">Center</option>
+                        <option value="top">Top</option>
+                        <option value="bottom">bottom</option>
+                        <option value="left">left</option>
+                        <option value="right">Right</option>
+                    </select>
+                    </br>
+                    <input type="radio" name="position" id="percentage" value="percentage">
+                    <label for="percentage">Percentage</label>
+                    <input type="number" value="0" min="0" max="100" id="percentage-one">%
+                    <input type="number" value="0" min="0" max="100" id="percentage-two">%
+                    </br>
 
-            <span class="input-group ">
-                <label for="red">Red</label>
-                <input type="number" name="red" id="red" step="1" min="0" max="255" value="0" class="red">
-            </span>
+                    <input type="radio" name="position" id="length" value="length">
+                    <label for="length">Length: </label>
+                    <input type="number" value="0" min="0" max="100">
+                    <select id="units-one">
+                        <option value="px">px</option>
+                        <option value="em">em</option>
+                        <option value="rem">rem</option>
+                        <option value="ch">ch</option>
+                        <option value="vw">vw</option>
+                        <option value="vh">vh</option>
+                        <option value="ex">ex</option>
+                        <option value="vmin">vmin</option>
+                        <option value="vmax">vmax</option>
+                        <option value="cm">cm</option>
+                        <option value="mm">mm</option>
+                        <option value="Q">Q</option>
+                        <option value="in">in</option>
+                        <option value="pc">pc</option>
+                        <option value="pt">pt</option>
+                    </select>
+                    <input type="number" value="0" min="0" max="100">
+                    <select id="units-two">
+                        <option value="px">px</option>
+                        <option value="em">em</option>
+                        <option value="rem">rem</option>
+                        <option value="ch">ch</option>
+                        <option value="vw">vw</option>
+                        <option value="vh">vh</option>
+                        <option value="ex">ex</option>
+                        <option value="vmin">vmin</option>
+                        <option value="vmax">vmax</option>
+                        <option value="cm">cm</option>
+                        <option value="mm">mm</option>
+                        <option value="Q">Q</option>
+                        <option value="in">in</option>
+                        <option value="pc">pc</option>
+                        <option value="pt">pt</option>
+                    </select>
+                    </br>
 
-            <span class="input-group ">
-                <label for="green">Green</label>
-                <input type="number" name="green" id="green" step="1" min="0" max="255" value="255" class="green">
-            </span>
+                </span>
 
-            <span class="input-group ">
-                <label for="blue">Blue</label>
-                <input type="number" name="blue" id="blue" step="1" min="0" max="255" value="0" class="blue">
-            </span>
+                <ul class="color-list">
+                    <button class="add-color-button">+</button>
+                </ul>
 
-            <span class="input-group ">
-                <label for="color-opacity">Opacity</label>
-                <input type="number" name="color-opacity" id="color-opacity" step=".01" min="0" max="1" value="1" class="opacity-number">
-            </span>
+                <div class="color-input">
 
-            <span class="input-group">
-                <Label for="percentage">Percentage: </Label>
-                <input type="number" name="percentage" id="percentage" step="1" min="0" max="100" value="25" class="percentage">
-                <i class="input-icon">%</i>
-            </span>
+                    <label for="hex-value">Hex: </label>
+                    <input type="text" name="hex-value" id="hex-value" value="#00ff00" maxlength="7" class="hex-value">
+
+                    <label for="red">Red</label>
+                    <input type="number" name="red" id="red" step="1" min="0" max="255" value="0" class="red">
+
+                    <label for="green">Green</label>
+                    <input type="number" name="green" id="green" step="1" min="0" max="255" value="255" class="green">
+
+                    <label for="blue">Blue</label>
+                    <input type="number" name="blue" id="blue" step="1" min="0" max="255" value="0" class="blue">
+
+                    <label for="color-opacity">Opacity</label>
+                    <input type="number" name="color-opacity" id="color-opacity" step=".01" min="0" max="1" value="1" class="opacity-number">
+
+                    <Label for="percentage">Percentage: </Label>
+                    <input type="number" name="percentage" id="percentage" step="1" min="0" max="100" value="25" class="percentage">
+                    <i class="input-icon">%</i>
+
+            </div>
         </div>
-        <ul class="color-list">
-            <button class="add-color-button">+</button>
-        </ul>
       </main>
       <script type="text/javascript" src="src/color.js"></script>
       <script type="text/javascript" src="src/colorList.js"></script>
