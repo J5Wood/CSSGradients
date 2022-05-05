@@ -26,58 +26,30 @@ body {
 
 .body-columns {
   display: grid;
-  gap: 20px 0px;
+  gap: 30px 0px;
   width: 95%;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: minmax(100px, 1fr) 1fr;
-  padding: 20px;
+  grid-template-rows: minmax(80px, 1fr);
+  padding: 30px;
   justify-content: center;
   align-items: center;
 }
 
 .color-input {
   align-self: start;
-}
-
-.input-selection {
-  /* width: 80%;
-  padding: 40px 10px;
-  gap: 20px;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr ;
-  grid-template-rows: 1fr 1fr;
-   */
+  gap: 5px 10px;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
 }
 
-/* .input-group:first-child{
-  grid-column: 1/3;
-} */
-
-/* .input-group:nth-child(3){
-  grid-column: 4/6;
-} */
-
-/* .input-group:nth-last-child(-n+5) {
-  grid-row: 2/3;
-} */
-
-/* .input-group {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  gap: 5px;
-  background-color: rgb(255, 255, 255);
-  padding: 4px;
-  border: 2px outset rgba(163, 163, 163, .6);
-  border-top: 1px solid rgba(0, 0, 0, 0.2);
-  border-left: 1px solid rgba(0, 0, 0, 0.33);
-  border-radius: 5px;
+#hex-value {
+  grid-column: 2 / span 2;
 }
 
-.input-group label {
-  width: 100%;
-  line-height: 1.5em;
-} */
+.color-input > label:last-child {
+  grid-row: 4 / span 1;
+}
 
 .color-list {
   width: 90%;

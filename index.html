@@ -14,9 +14,6 @@
 
             <div class="body-columns">
 
-
-            <!-- <div class="input-selection"> -->
-
                 <span class="gradient-type">
                     <label for="gradients">Gradient Type: </label>
                 </br>
@@ -115,25 +112,32 @@
 
                 <div class="color-input">
 
-                    <label for="hex-value">Hex: </label>
+                    <label for="hex-value">Hex:                     </label>
                     <input type="text" name="hex-value" id="hex-value" value="#00ff00" maxlength="7" class="hex-value">
 
-                    <label for="red">Red</label>
-                    <input type="number" name="red" id="red" step="1" min="0" max="255" value="0" class="red">
+                    <label for="red">Red:
+                    </br>
+                        <input type="number" name="red" id="red" step="1" min="0" max="255" value="0" class="red">
+                    </label>
+                    
+                    <label for="green">Green: 
+                    </br>
+                        <input type="number" name="green" id="green" step="1" min="0" max="255" value="255" class="green">
+                    </label>
 
-                    <label for="green">Green</label>
-                    <input type="number" name="green" id="green" step="1" min="0" max="255" value="255" class="green">
+                    <label for="blue">Blue: 
+                    </br>
+                        <input type="number" name="blue" id="blue" step="1" min="0" max="255" value="0" class="blue">
+                    </label>
 
-                    <label for="blue">Blue</label>
-                    <input type="number" name="blue" id="blue" step="1" min="0" max="255" value="0" class="blue">
+                    <label for="color-opacity">Opacity
+                        <input type="number" name="color-opacity" id="color-opacity" step=".01" min="0" max="1" value="1" class="opacity-number">
+                    </label>
 
-                    <label for="color-opacity">Opacity</label>
-                    <input type="number" name="color-opacity" id="color-opacity" step=".01" min="0" max="1" value="1" class="opacity-number">
-
-                    <Label for="percentage">Percentage: </Label>
-                    <input type="number" name="percentage" id="percentage" step="1" min="0" max="100" value="25" class="percentage">
-                    <i class="input-icon">%</i>
-
+                    <Label for="percentage">Percentage: 
+                        <input type="number" name="percentage" id="percentage" step="1" min="0" max="100" value="25" class="percentage">
+                        <i class="input-icon">%</i>
+                    </Label>
             </div>
         </div>
       </main>
