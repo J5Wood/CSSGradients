@@ -36,20 +36,55 @@ body {
 }
 
 .color-input {
-  align-self: start;
+  /* align-self: start; */
+  /* align-items: start; */
+  /* justify-items: start; */
   display: grid;
   gap: 5px 10px;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
 }
 
-#hex-value {
+.color-input > label:first-child {
+  grid-column: 1 / span 6;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  gap: 15px;
+  justify-self: center;
+}
+
+.color-input > label:nth-child(n + 2):nth-child(-n + 4) {
+  grid-column: span 2;
+}
+
+.color-input > label:nth-child(n + 5) {
+  grid-column: span 3;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  /* max-width: 70px; */
+}
+
+/* .color-input > label:nth-child(n + 5):first-child {
+  /* grid-column: 1 / span 2;
+} */
+
+.color-input > label > input {
+  grid-row: 2;
+}
+
+/* .color-input > label:last-child {
+  grid-column: 4;
+} */
+
+/* #hex-value {
   grid-column: 2 / span 2;
-}
+} */
 
-.color-input > label:last-child {
+/* .color-input > label:last-child {
   grid-row: 4 / span 1;
-}
+} */
 
 .color-list {
   width: 90%;
