@@ -5,6 +5,8 @@
 
 // ***** Add dynamic input for background position on radial gradients
 
+// ***** clicking percentage label changes background style
+
 const hexInput = document.querySelector(".hex-value");
 const redInput = document.querySelector(".red");
 const blueInput = document.querySelector(".blue");

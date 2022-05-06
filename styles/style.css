@@ -1,5 +1,6 @@
 html,
 body {
+  font-family: Geneva, Verdana, Tahomj sans-serif;
   margin: 0;
   padding: 0;
   height: 100%;
@@ -7,6 +8,14 @@ body {
   background-color: rgb(255, 255, 255);
   text-align: center;
   line-height: 1.5rem;
+  background-color: rgb(255, 255, 255);
+}
+
+input {
+  padding: 4px;
+  border: 0;
+  box-shadow: 0px 0px 4px rgb(167, 167, 167);
+  border-radius: 5px;
 }
 
 .main-body {
@@ -21,7 +30,6 @@ body {
   border: 2px solid black;
   width: 100vw;
   min-height: 300px;
-  background: rgba(0, 255, 0, 1);
 }
 
 .body-columns {
@@ -36,13 +44,19 @@ body {
 }
 
 .color-input {
-  /* align-self: start; */
-  /* align-items: start; */
-  /* justify-items: start; */
+  justify-items: center;
   display: grid;
-  gap: 5px 10px;
+  gap: 15px;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
+}
+
+.color-input > label {
+  border: 1px solid rgb(95, 83, 83);
+  border-radius: 4px;
+  padding: 7px;
+  box-shadow: 2px 1px 3px rgb(161, 160, 160);
+  background-color: #f4f4f4;
 }
 
 .color-input > label:first-child {
@@ -52,6 +66,11 @@ body {
   align-items: center;
   gap: 15px;
   justify-self: center;
+  border: 1px solid rgb(95, 83, 83);
+  border-radius: 4px;
+  padding: 10px;
+  box-shadow: 2px 1px 3px rgb(161, 160, 160);
+  background-color: #f4f4f4;
 }
 
 .color-input > label:nth-child(n + 2):nth-child(-n + 4) {
@@ -61,30 +80,25 @@ body {
 .color-input > label:nth-child(n + 5) {
   grid-column: span 3;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   grid-template-rows: 1fr 1fr;
-  /* max-width: 70px; */
+  justify-items: center;
 }
 
-/* .color-input > label:nth-child(n + 5):first-child {
-  /* grid-column: 1 / span 2;
-} */
-
-.color-input > label > input {
-  grid-row: 2;
+.color-input > label:nth-child(2) {
+  box-shadow: 2px 1px 3px rgb(255, 0, 0);
+  max-width: 80px;
 }
 
-/* .color-input > label:last-child {
-  grid-column: 4;
-} */
+.color-input > label:nth-child(3) {
+  box-shadow: 2px 1px 3px rgb(0, 255, 0);
+  max-width: 80px;
+}
 
-/* #hex-value {
-  grid-column: 2 / span 2;
-} */
-
-/* .color-input > label:last-child {
-  grid-row: 4 / span 1;
-} */
+.color-input > label:nth-child(4) {
+  box-shadow: 2px 1px 3px rgb(0, 0, 255);
+  max-width: 80px;
+}
 
 .color-list {
   width: 90%;
