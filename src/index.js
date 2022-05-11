@@ -64,10 +64,8 @@ gradientType.addEventListener("change", () => updateColorDisplay());
 for (let option of radialShapes) {
   option.addEventListener("change", () => updateColorDisplay());
 }
-for (let option of keywordPosition) {
-  option / addEventListener("change", () => updateColorDisplay());
-}
-// gradientPosition.addEventListener("change", () => updateColorDisplay());
+
+radialOptions.addEventListener("change", () => updateColorDisplay());
 
 function handleColorChange(e) {
   // ***** Handling number checking in a couple different spots, clean up a little?
@@ -81,6 +79,7 @@ function handleColorChange(e) {
     green = e.target.value;
   } else if (e.target.name === "percentage") {
     colorList.currentColor.dataset.percent = e.target.value;
+    colorList.currentColor.childNodes[1].innerHTML = `${e.target.value}%`;
   } else {
     if (e.target.value > 1) e.target.value = 1;
     opacity = e.target.value;

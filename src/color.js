@@ -29,8 +29,8 @@ class Color {
     span.classList.add("color-sample");
     span.style.backgroundColor = `rgba(${this.red}, ${this.green}, ${this.blue}, ${this.opacity}) `;
 
-    const h3 = document.createElement("h3");
-    h3.innerText = "Color Sample 1";
+    const info = document.createElement("span");
+    info.innerText = `${this.percent}%`;
 
     const input = document.createElement("input");
     input.setAttribute("name", "color-input");
@@ -48,7 +48,7 @@ class Color {
     button.addEventListener("click", (e) => this.removeColor(e));
 
     newItem.appendChild(span);
-    newItem.appendChild(h3);
+    newItem.appendChild(info);
     newItem.appendChild(input);
     newItem.appendChild(button);
     newItem.addEventListener("click", (e) => this.selectColor(e));

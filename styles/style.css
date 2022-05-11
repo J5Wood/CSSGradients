@@ -139,6 +139,7 @@ h3 {
   margin: 10px;
   padding: 5px;
   border: 2px solid black;
+  gap: 20px;
 }
 
 .selected-color {
@@ -147,12 +148,10 @@ h3 {
 }
 
 .color p {
-  padding: 0 10%;
   font-size: 1.25em;
 }
-
-.color h3 {
-  padding-left: 5px;
+.color input {
+  width: 50px;
 }
 
 .color-sample {
