@@ -14,8 +14,8 @@
 
             <div class="body-columns">
 
-                <span class="gradient-type">
-                    <label for="gradients">Gradient Type: </label>
+                <span class="gradient-type main-background">
+                    <h3 for="gradients">Gradient Type: </h3>
                 </br>
                     <select id="gradients" class="gradient-type">
                         <option value="radial">Radial Gradient</option>
@@ -24,21 +24,19 @@
                     </select>
                 </span>
 
-                <span class="linear-options">
+                <span class="linear-options main-background">
                     <label for="degrees">Degrees: </label>
                     <input type="number" id="degrees" step="1" min="0" max="359" value="90" class="degrees">°
                 </span>
 
-                <span class="radial-options">
-                    <label for="shape">Shape: </label>
-                    </br>
+                <span class="radial-options main-background">
+                    <h3 for="shape">Shape: </h3>
                     <input type="radio" name="shape" id="circle" value="circle" checked="true">
                     <label for="circle">Circle</label>
                     <input type="radio" name="shape" id="ellipse" value="ellipse">
                     <label for="ellipse">Ellipse</label>
                     </br>
-                    <label for="size">Sizing:</label>
-                    </br>
+                    <h3 for="size">Sizing:</h3>
                     <select class="size">
                         <option value="farthest-corner">Farthest Corner</option>
                         <option value="closest-corner">Closest Corner</option>
@@ -46,8 +44,7 @@
                         <option value="closest-side">Closest Side</option>
                     </select>
                     </br>
-                    <label for="position">Position: </label>
-                    </br>
+                    <h3 for="position">Position: </h3>
                     <input type="radio" name="position" checked="true" id="keyword" value="keyword">
                     <label for="keyword">Keyword</label>
                     <select id="keyword-position" class="keyword-position">
@@ -112,30 +109,30 @@
 
                 <div class="color-input">
 
-                    <label for="hex-value">Hex: 
+                    <label for="hex-value" class="main-background">Hex: 
                     <input type="text" name="hex-value" id="hex-value" value="#00ff00" maxlength="7" class="hex-value">
                     </label>
 
-                    <label for="red">Red:
+                    <label for="red" class="main-background">Red:
                     </br>
                         <input type="number" name="red" id="red" step="1" min="0" max="255" value="0" class="red">
                     </label>
                     
-                    <label for="green">Green: 
+                    <label for="green" class="main-background">Green: 
                     </br>
                         <input type="number" name="green" id="green" step="1" min="0" max="255" value="255" class="green">
                     </label>
 
-                    <label for="blue">Blue: 
+                    <label for="blue" class="main-background">Blue: 
                     </br>
                         <input type="number" name="blue" id="blue" step="1" min="0" max="255" value="0" class="blue">
                     </label>
 
-                    <label for="color-opacity">Opacity
+                    <label for="color-opacity" class="main-background">Opacity
                         <input type="number" name="color-opacity" id="color-opacity" step=".01" min="0" max="1" value="1" class="opacity-number">
                     </label>
 
-                    <label for="percentage">Percentage:
+                    <label for="percentage" class="main-background">Percentage:
                         <span>
                             <input type="number" name="percentage" id="percentage" step="1" min="0" max="100" value="25" class="percentage">
                             <i class="input-icon">%</i>

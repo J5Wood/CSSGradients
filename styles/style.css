@@ -18,12 +18,26 @@ input {
   border-radius: 5px;
 }
 
+h3 {
+  margin: 0;
+  padding: 8px 0px 3px 0px;
+  text-align: center;
+}
+
 .main-body {
   height: 100%;
   width: 100%;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
+}
+
+.main-background {
+  border: 1px solid rgb(95, 83, 83);
+  border-radius: 4px;
+  padding: 7px;
+  box-shadow: 2px 1px 3px rgb(161, 160, 160);
+  background-color: #f4f4f4;
 }
 
 .selection-display {
@@ -39,8 +53,17 @@ input {
   grid-template-columns: 1fr 1fr;
   grid-template-rows: minmax(80px, 1fr);
   padding: 30px;
-  justify-content: center;
   align-items: center;
+}
+
+.gradient-type {
+  padding: 7px 20px;
+  width: max-content;
+  justify-self: center;
+}
+
+.radial-options {
+  text-align: start;
 }
 
 .color-input {
@@ -51,14 +74,6 @@ input {
   grid-template-rows: 1fr 1fr 1fr;
 }
 
-.color-input > label {
-  border: 1px solid rgb(95, 83, 83);
-  border-radius: 4px;
-  padding: 7px;
-  box-shadow: 2px 1px 3px rgb(161, 160, 160);
-  background-color: #f4f4f4;
-}
-
 .color-input > label:first-child {
   grid-column: 1 / span 6;
   display: flex;
@@ -66,11 +81,7 @@ input {
   align-items: center;
   gap: 15px;
   justify-self: center;
-  border: 1px solid rgb(95, 83, 83);
-  border-radius: 4px;
   padding: 10px;
-  box-shadow: 2px 1px 3px rgb(161, 160, 160);
-  background-color: #f4f4f4;
 }
 
 .color-input > label:nth-child(n + 2):nth-child(-n + 4) {
