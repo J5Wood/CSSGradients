@@ -145,7 +145,7 @@ function updateColorDisplay() {
 
   if (type === "radial") {
     linearOptions.style.display = "none";
-    radialOptions.style.display = "block";
+    radialOptions.style.display = "";
 
     for (let option of gradientPosition) {
       if (option.checked) {
@@ -198,7 +198,7 @@ function updateColorDisplay() {
     type = `${type}-gradient(${shape} ${size.value} ${position},`;
   } else {
     radialOptions.style.display = "none";
-    linearOptions.style.display = "block";
+    linearOptions.style.display = "";
     type += `-gradient( ${degreeInput.value}deg, `;
   }
 

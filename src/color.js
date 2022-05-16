@@ -30,7 +30,7 @@ class Color {
     span.style.backgroundColor = `rgba(${this.red}, ${this.green}, ${this.blue}, ${this.opacity}) `;
 
     const info = document.createElement("span");
-    info.innerText = `${this.percent}%`;
+    info.innerText = ` ${this.percent}%`;
 
     const input = document.createElement("input");
     input.setAttribute("name", "color-input");

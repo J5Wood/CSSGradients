@@ -16,7 +16,6 @@
 
                 <span class="gradient-type main-background">
                     <h3 for="gradients">Gradient Type: </h3>
-                </br>
                     <select id="gradients" class="gradient-type">
                         <option value="radial">Radial Gradient</option>
                         <option value="linear">Linear Gradient</option>
@@ -30,76 +29,86 @@
                 </span>
 
                 <span class="radial-options main-background">
-                    <h3 for="shape">Shape: </h3>
-                    <input type="radio" name="shape" id="circle" value="circle" checked="true">
-                    <label for="circle">Circle</label>
-                    <input type="radio" name="shape" id="ellipse" value="ellipse">
-                    <label for="ellipse">Ellipse</label>
-                    </br>
-                    <h3 for="size">Sizing:</h3>
+                    <span class="radial-types">
+                        <h3>Shape:</h3>
+                        <label for="circle">
+                            <input type="radio" name="shape" id="circle" value="circle" checked="true">
+                            Circle
+                        </label>
+                        <label for="ellipse">
+                            <input type="radio" name="shape" id="ellipse" value="ellipse">
+                            Ellipse
+                        </label>
+                    </span>
+                    <span class="radial-types">
+                        <h3>Sizing:</h3>
                     <select class="size">
                         <option value="farthest-corner">Farthest Corner</option>
                         <option value="closest-corner">Closest Corner</option>
                         <option value="farthest-side">Farthest Side</option>
                         <option value="closest-side">Closest Side</option>
                     </select>
-                    </br>
-                    <h3 for="position">Position: </h3>
-                    <input type="radio" name="position" checked="true" id="keyword" value="keyword">
-                    <label for="keyword">Keyword</label>
-                    <select id="keyword-position" class="keyword-position">
-                        <option value="center">Center</option>
-                        <option value="top">Top</option>
-                        <option value="bottom">bottom</option>
-                        <option value="left">left</option>
-                        <option value="right">Right</option>
-                    </select>
-                    </br>
-                    <input type="radio" name="position" id="percentage" value="percentage">
-                    <label for="percentage">Percentage</label>
-                    <input type="number" value="0" min="0" max="100" id="percentage-one">%
-                    <input type="number" value="0" min="0" max="100" id="percentage-two">%
-                    </br>
-
-                    <input type="radio" name="position" id="length" value="length">
-                    <label for="length">Length: </label>
-                    <input type="number" value="0" min="0" max="100">
-                    <select id="units-one">
-                        <option value="px">px</option>
-                        <option value="em">em</option>
-                        <option value="rem">rem</option>
-                        <option value="ch">ch</option>
-                        <option value="vw">vw</option>
-                        <option value="vh">vh</option>
-                        <option value="ex">ex</option>
-                        <option value="vmin">vmin</option>
-                        <option value="vmax">vmax</option>
-                        <option value="cm">cm</option>
-                        <option value="mm">mm</option>
-                        <option value="Q">Q</option>
-                        <option value="in">in</option>
-                        <option value="pc">pc</option>
-                        <option value="pt">pt</option>
-                    </select>
-                    <input type="number" value="0" min="0" max="100">
-                    <select id="units-two">
-                        <option value="px">px</option>
-                        <option value="em">em</option>
-                        <option value="rem">rem</option>
-                        <option value="ch">ch</option>
-                        <option value="vw">vw</option>
-                        <option value="vh">vh</option>
-                        <option value="ex">ex</option>
-                        <option value="vmin">vmin</option>
-                        <option value="vmax">vmax</option>
-                        <option value="cm">cm</option>
-                        <option value="mm">mm</option>
-                        <option value="Q">Q</option>
-                        <option value="in">in</option>
-                        <option value="pc">pc</option>
-                        <option value="pt">pt</option>
-                    </select>
-                    </br>
+                    </span>
+                    <span class="radial-types">
+                        <h3>Position:</h3>
+                        <label for="keyword">
+                            <input type="radio" name="position" checked="true" id="keyword" value="keyword">
+                            Keyword
+                            <select id="keyword-position" class="keyword-position">
+                                <option value="center">Center</option>
+                                <option value="top">Top</option>
+                                <option value="bottom">bottom</option>
+                                <option value="left">left</option>
+                                <option value="right">Right</option>
+                            </select>
+                        </label>
+                        <label for="percentage">
+                            <input type="radio" name="position" id="percentage" value="percentage">
+                            Percentage
+                            <input type="number" value="0" min="0" max="100" id="percentage-one">%
+                            <input type="number" value="0" min="0" max="100" id="percentage-two">%
+                        </label>
+                        <label for="length">
+                            <input type="radio" name="position" id="length" value="length">
+                            Length:
+                            <input type="number" value="0" min="0" max="100">
+                            <select id="units-one">
+                                <option value="px">px</option>
+                                <option value="em">em</option>
+                                <option value="rem">rem</option>
+                                <option value="ch">ch</option>
+                                <option value="vw">vw</option>
+                                <option value="vh">vh</option>
+                                <option value="ex">ex</option>
+                                <option value="vmin">vmin</option>
+                                <option value="vmax">vmax</option>
+                                <option value="cm">cm</option>
+                                <option value="mm">mm</option>
+                                <option value="Q">Q</option>
+                                <option value="in">in</option>
+                                <option value="pc">pc</option>
+                                <option value="pt">pt</option>
+                            </select>
+                            <input type="number" value="0" min="0" max="100">
+                            <select id="units-two">
+                                <option value="px">px</option>
+                                <option value="em">em</option>
+                                <option value="rem">rem</option>
+                                <option value="ch">ch</option>
+                                <option value="vw">vw</option>
+                                <option value="vh">vh</option>
+                                <option value="ex">ex</option>
+                                <option value="vmin">vmin</option>
+                                <option value="vmax">vmax</option>
+                                <option value="cm">cm</option>
+                                <option value="mm">mm</option>
+                                <option value="Q">Q</option>
+                                <option value="in">in</option>
+                                <option value="pc">pc</option>
+                                <option value="pt">pt</option>
+                            </select>
+                        </label>
+                    </span>
 
                 </span>
 

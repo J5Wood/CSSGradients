@@ -12,15 +12,27 @@ body {
 }
 
 input {
-  padding: 4px;
+  padding: 1px;
+  border: 0;
+  box-shadow: 0px 0px 4px rgb(167, 167, 167);
+  border-radius: 5px;
+  text-align: center;
+}
+
+input[type="radio"] {
+  background-color: #fbfbfb;
+  box-shadow: none;
+}
+
+select {
+  padding: 1px;
   border: 0;
   box-shadow: 0px 0px 4px rgb(167, 167, 167);
   border-radius: 5px;
 }
-
 h3 {
   margin: 0;
-  padding: 8px 0px 3px 0px;
+  padding-bottom: 10px;
   text-align: center;
 }
 
@@ -50,20 +62,45 @@ h3 {
 
 .body-columns {
   display: grid;
-  gap: 30px 0px;
+  gap: 20px 0px;
   width: 95%;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: minmax(80px, 1fr);
+  grid-template-rows: min-content min-content min-content;
   padding: 30px;
   align-items: center;
 }
 
+.gradient-type {
+  grid-column: 1 / span 2;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.linear-options {
+  grid-column: 1 / span 2;
+}
+
 .radial-options {
-  text-align: start;
+  width: 95%;
+  grid-column: 1 / span 2;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  gap: 10px 40px;
+}
+
+.radial-types:last-child {
+  grid-column: 1 / span 2;
+  display: flex;
+  flex-flow: column;
+}
+
+.radial-types {
+  display: flex;
+  flex-direction: column;
 }
 
 .color-input {
-  justify-items: center;
   display: grid;
   gap: 15px;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -113,7 +150,7 @@ h3 {
   min-height: fit-content;
   display: flex;
   flex-flow: column nowrap;
-  align-items: center;
+  align-items: stretch;
 }
 
 .add-color-button {
@@ -126,6 +163,7 @@ h3 {
   text-align: center;
   text-decoration: none;
   font-size: 2em;
+  align-self: center;
 }
 
 .add-color-button:hover {
@@ -135,6 +173,7 @@ h3 {
 .color {
   display: flex;
   align-items: center;
+  justify-content: space-around;
   height: 30px;
   margin: 10px;
   padding: 5px;
