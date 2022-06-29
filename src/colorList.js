@@ -48,17 +48,17 @@ class ColorList {
   addInitialColors() {
     this.addNewColor();
     redInput.value = 255;
-    blueInput.value = 0;
-    greenInput.value = 0;
-    hexInput.value = "#ff0000";
+    blueInput.value = 255;
+    greenInput.value = 255;
+    hexInput.value = "#ffffff";
     percentInput.value = "100";
     updateColorDisplay();
     this.addNewColor();
     redInput.value = 0;
-    greenInput.value = 255;
-    blueInput.value = 0;
-    hexInput.value = "#00ff00";
-    percentInput.value = "25";
+    greenInput.value = 45;
+    blueInput.value = 45;
+    hexInput.value = "#002d2d";
+    percentInput.value = "0";
     updateColorDisplay();
   }
 }
