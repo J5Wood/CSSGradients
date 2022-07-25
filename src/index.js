@@ -28,6 +28,7 @@ const lengthOne = unitsOne.previousElementSibling;
 const unitsTwo = document.querySelector("#units-two");
 const lengthTwo = unitsTwo.previousElementSibling;
 const size = document.querySelector(".size");
+const codeDisplay = document.querySelector(".code-display");
 
 let red = 0;
 let green = 255;
@@ -222,7 +223,9 @@ function updateColorDisplay() {
   if (gradientList.length === 1) {
     gradientList[1] = gradientList[0];
   }
-  colorDisplay.style.background = `${type} ${gradientList.join(", ")})`;
+  const fullBackground = `${type} ${gradientList.join(", ")})`;
+  colorDisplay.style.background = fullBackground;
+  codeDisplay.innerHTML = "background: " + fullBackground + ";";
 }
 
 const colorList = new ColorList();

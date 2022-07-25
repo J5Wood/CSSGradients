@@ -58,6 +58,14 @@ h3 {
   border: 2px solid black;
   width: 100vw;
   min-height: 300px;
+  margin-bottom: 20px;
+}
+
+.code-display {
+  padding: 8px 50px;
+  border: 1px solid black;
+  box-shadow: 1px 1px 1.5px rgba(21, 21, 21, 0.85),
+    -1px -1px 1.5px rgba(21, 21, 21, 0.85);
 }
 
 .body-columns {
