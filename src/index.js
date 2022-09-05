@@ -226,6 +226,8 @@ function updateColorDisplay() {
   const fullBackground = `${type} ${gradientList.join(", ")})`;
   colorDisplay.style.background = fullBackground;
   codeDisplay.innerHTML = "background: " + fullBackground + ";";
+  // Set backgound in local storage. Reset on first load. Add reset button to UI
+  // localStorage.setItem
 }
 
 const colorList = new ColorList();
