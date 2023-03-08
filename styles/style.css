@@ -42,6 +42,7 @@ h3 {
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
+  gap: 25px;
 }
 
 .main-background {
@@ -58,7 +59,6 @@ h3 {
   border: 2px solid black;
   width: 95vw;
   min-height: 300px;
-  margin-bottom: 20px;
 }
 
 .code-display-wrapper {
@@ -83,7 +83,6 @@ h3 {
   width: 100vw;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: min-content min-content min-content;
-  padding-top: 30px;
   align-items: center;
 }
 

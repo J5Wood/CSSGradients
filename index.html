@@ -10,22 +10,20 @@
   <body>
       <main class="main-body">
         <h1>CSS Gradient Tester</h1>
+        <span class="gradient-type main-background">
+            <h3 for="gradients">Gradient Type: </h3>
+            <select id="gradients" class="gradient-type">
+                <option value="radial">Radial Gradient</option>
+                <option value="linear">Linear Gradient</option>
+
+            </select>
+        </span>
         <div class="selection-display"></div>
             <div class="code-display-wrapper">
                 <div class="code-display"></div>
                 <button class="code-copy-button">COPY</button>
             </div>
             <div class="body-columns">
-
-                <span class="gradient-type main-background">
-                    <h3 for="gradients">Gradient Type: </h3>
-                    <select id="gradients" class="gradient-type">
-                        <option value="radial">Radial Gradient</option>
-                        <option value="linear">Linear Gradient</option>
-
-                    </select>
-                </span>
-
                 <span class="linear-options main-background">
                     <label for="degrees">Degrees: </label>
                     <input type="number" id="degrees" step="1" min="0" max="359" value="90" class="degrees">°
