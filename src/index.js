@@ -5,8 +5,6 @@
 
 // ***** Add dynamic input for background position on radial gradients
 
-// ***** Copy button works in browser terminal but not from source
-
 // ***** Move gradient type up top, too crowded
 
 const hexInput = document.querySelector(".hex-value");
@@ -245,5 +243,5 @@ function sortColorList() {
 
 function addToClipboard() {
   const codeSnippet = document.querySelector(".code-display").innerText;
-  copy(codeSnippet);
+  navigator.clipboard.writeText(codeSnippet);
 }
