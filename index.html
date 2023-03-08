@@ -11,8 +11,10 @@
       <main class="main-body">
         <h1>CSS Gradient Tester</h1>
         <div class="selection-display"></div>
-
-        <div class="code-display"></div>
+            <div class="code-display-wrapper">
+                <div class="code-display"></div>
+                <button class="code-copy-button">COPY</button>
+            </div>
             <div class="body-columns">
 
                 <span class="gradient-type main-background">
@@ -63,8 +65,8 @@
                                 <option value="right">Right</option>
                             </select>
                         </label>
-                        <label for="percentage">
-                            <input type="radio" name="position" id="percentage" value="percentage">
+                        <label for="percentage-position">
+                            <input type="radio" name="position" id="percentage-position" value="percentage-position">
                             Percentage
                             <input type="number" value="0" min="0" max="100" id="percentage-one">%
                             <input type="number" value="0" min="0" max="100" id="percentage-two">%
@@ -142,9 +144,9 @@
                         <input type="number" name="color-opacity" id="color-opacity" step=".01" min="0" max="1" value="1" class="opacity-number">
                     </label>
 
-                    <label for="percentage" class="main-background">Percentage:
+                    <label for="percentage-input" class="main-background">Percentage:
                         <span>
-                            <input type="number" name="percentage" id="percentage" step="1" min="0" max="100" value="0" class="percentage">
+                            <input type="number" name="percentage-input" id="percentage-input" step="1" min="0" max="100" value="0" class="percentage-input">
                             <i class="input-icon">%</i>
                         </span>
                     </label>

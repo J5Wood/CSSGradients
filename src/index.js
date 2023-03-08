@@ -5,7 +5,9 @@
 
 // ***** Add dynamic input for background position on radial gradients
 
-// ***** clicking percentage label changes background style
+// ***** Copy button works in browser terminal but not from source
+
+// ***** Move gradient type up top, too crowded
 
 const hexInput = document.querySelector(".hex-value");
 const redInput = document.querySelector(".red");
@@ -13,7 +15,7 @@ const blueInput = document.querySelector(".blue");
 const greenInput = document.querySelector(".green");
 const opacityInput = document.querySelector(".opacity-number");
 const degreeInput = document.querySelector(".degrees");
-const percentInput = document.querySelector(".percentage");
+const percentInput = document.querySelector(".percentage-input");
 const colorDisplay = document.querySelector(".selection-display");
 const gradientType = document.querySelector("#gradients");
 const gradientPosition = document.getElementsByName("position");
@@ -29,6 +31,7 @@ const unitsTwo = document.querySelector("#units-two");
 const lengthTwo = unitsTwo.previousElementSibling;
 const size = document.querySelector(".size");
 const codeDisplay = document.querySelector(".code-display");
+const copyCodeButton = document.querySelector(".code-copy-button");
 
 let red = 0;
 let green = 255;
@@ -62,6 +65,8 @@ degreeInput.addEventListener("keyup", (e) => updateColorDisplay());
 
 gradientType.addEventListener("change", () => updateColorDisplay());
 
+copyCodeButton.addEventListener("click", (e) => addToClipboard(e));
+
 for (let option of radialShapes) {
   option.addEventListener("change", () => updateColorDisplay());
 }
@@ -78,7 +83,7 @@ function handleColorChange(e) {
     blue = e.target.value;
   } else if (e.target.name === "green") {
     green = e.target.value;
-  } else if (e.target.name === "percentage") {
+  } else if (e.target.name === "percentage-input") {
     colorList.currentColor.dataset.percent = e.target.value;
     colorList.currentColor.childNodes[1].innerHTML = `${e.target.value}%`;
   } else {
@@ -103,6 +108,7 @@ function handleColorChange(e) {
   colorList.currentColor.getElementsByTagName(
     "input"
   )[0].value = `#${hexValArr.join("")}`;
+  sortColorList();
   updateColorDisplay();
 }
 
@@ -124,6 +130,7 @@ function handleHexChange(value) {
   colorList.currentColor.firstElementChild.style.background = `rgba(${red}, ${green}, ${blue}, ${opacity})`;
   colorList.currentColor.getElementsByTagName("input")[0].value = `#${value}`;
   hexInput.value = `#${value}`;
+  sortColorList();
   updateColorDisplay();
 }
 
@@ -160,7 +167,7 @@ function updateColorDisplay() {
     }
     if (positionStyle === "keyword") {
       position = `at ${keywordPosition.value}`;
-    } else if (positionStyle === "percentage") {
+    } else if (positionStyle === "percentage-position") {
       position = `at ${percentageOne.value}% ${percentageTwo.value}%`;
     } else if (positionStyle === "length") {
       let [length, height] = [lengthOne.value, lengthTwo.value];
@@ -229,3 +236,14 @@ function updateColorDisplay() {
 }
 
 const colorList = new ColorList();
+
+function sortColorList() {
+  const colorListChildren = [...colorList.list.children];
+  colorListChildren.sort((a, b) => a.dataset.percent - b.dataset.percent);
+  colorListChildren.forEach((node) => colorList.list.appendChild(node));
+}
+
+function addToClipboard() {
+  const codeSnippet = document.querySelector(".code-display").innerText;
+  copy(codeSnippet);
+}

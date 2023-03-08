@@ -56,25 +56,34 @@ h3 {
 
 .selection-display {
   border: 2px solid black;
-  width: 100vw;
+  width: 95vw;
   min-height: 300px;
   margin-bottom: 20px;
 }
 
-.code-display {
-  padding: 8px 50px;
+.code-display-wrapper {
+  width: 90vw;
+  padding: 8px 10px;
   border: 1px solid black;
   box-shadow: 1px 1px 1.5px rgba(21, 21, 21, 0.85),
     -1px -1px 1.5px rgba(21, 21, 21, 0.85);
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto;
+  gap: 20px;
+  align-items: center;
 }
 
+.code-copy-button {
+  height: 40px;
+}
 .body-columns {
   display: grid;
   gap: 20px 0px;
-  width: 95%;
+  width: 100vw;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: min-content min-content min-content;
-  padding: 30px;
+  padding-top: 30px;
   align-items: center;
 }
 
@@ -89,7 +98,7 @@ h3 {
 }
 
 .radial-options {
-  width: 95%;
+  max-width: 95%;
   grid-column: 1 / span 2;
   display: flex;
   flex-flow: row wrap;

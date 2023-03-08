@@ -36,7 +36,14 @@ class ColorList {
     };
     const newColor = new Color(colorObj);
     this.list.insertBefore(newColor.render(), this.list.lastElementChild);
+    this.sortList();
     updateColorDisplay();
+  }
+
+  sortList() {
+    const colorListChildren = [...this.list.children];
+    colorListChildren.sort((a, b) => a.dataset.percent - b.dataset.percent);
+    colorListChildren.forEach((node) => this.list.appendChild(node));
   }
 
   removeColor(e) {
