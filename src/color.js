@@ -25,6 +25,9 @@ class Color {
     newItem.setAttribute("data-opacity", this.opacity);
     newItem.setAttribute("data-percent", this.percent);
 
+    const colorSwatch = document.createElement("button");
+    colorSwatch.dataset.jscolor = `{preset:'dark', width:250, paletteCols:15, value:'rgba(${this.red} ,${this.green},${this.blue},${this.opactity})'}`;
+
     const span = document.createElement("span");
     span.classList.add("color-sample");
     span.style.backgroundColor = `rgba(${this.red}, ${this.green}, ${this.blue}, ${this.opacity}) `;
@@ -51,6 +54,7 @@ class Color {
     newItem.appendChild(info);
     newItem.appendChild(input);
     newItem.appendChild(button);
+    newItem.appendChild(colorSwatch);
     newItem.addEventListener("click", (e) => this.selectColor(e));
     return newItem;
   }
