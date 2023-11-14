@@ -26,11 +26,10 @@ class Color {
     newItem.setAttribute("data-percent", this.percent);
 
     const colorSwatch = document.createElement("button");
-    colorSwatch.dataset.jscolor = `{preset:'dark', width:250, paletteCols:15, value:'rgba(${this.red} ,${this.green},${this.blue},${this.opactity})'}`;
+    colorSwatch.classList.add("color-sample");
 
-    const span = document.createElement("span");
-    span.classList.add("color-sample");
-    span.style.backgroundColor = `rgba(${this.red}, ${this.green}, ${this.blue}, ${this.opacity}) `;
+    colorSwatch.dataset.jscolor = `{preset:'dark', width:250, value:'rgba(${this.red},${this.green},${this.blue},${this.opacity})', onChange: 'updateIndividualColorSelectors(this)', onInput: 'updateIndividualColorSelectors(this)'}`;
+    colorSwatch.dataset.currentColor = `rgba(${this.red},${this.green},${this.blue},${this.opacity})`;
 
     const info = document.createElement("span");
     info.innerText = ` ${this.percent}%`;
@@ -50,11 +49,10 @@ class Color {
 
     button.addEventListener("click", (e) => this.removeColor(e));
 
-    newItem.appendChild(span);
+    newItem.appendChild(colorSwatch);
     newItem.appendChild(info);
     newItem.appendChild(input);
     newItem.appendChild(button);
-    newItem.appendChild(colorSwatch);
     newItem.addEventListener("click", (e) => this.selectColor(e));
     return newItem;
   }

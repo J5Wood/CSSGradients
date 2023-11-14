@@ -35,7 +35,9 @@ class ColorList {
       removeColor: this.removeColor.bind(this),
     };
     const newColor = new Color(colorObj);
+
     this.list.insertBefore(newColor.render(), this.list.lastElementChild);
+    jscolor.install();
     this.sortList();
     updateColorDisplay();
   }
@@ -57,14 +59,14 @@ class ColorList {
     redInput.value = 255;
     blueInput.value = 255;
     greenInput.value = 255;
-    hexInput.value = "#ffffff";
+    hexInput.value = "#FFFFFF";
     percentInput.value = "100";
     updateColorDisplay();
     this.addNewColor();
     redInput.value = 0;
     greenInput.value = 45;
     blueInput.value = 45;
-    hexInput.value = "#002d2d";
+    hexInput.value = "#002D2D";
     percentInput.value = "0";
     updateColorDisplay();
   }

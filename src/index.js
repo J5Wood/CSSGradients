@@ -5,8 +5,6 @@
 
 // ***** Add dynamic input for background position on radial gradients
 
-// ***** Move gradient type up top, too crowded
-
 const hexInput = document.querySelector(".hex-value");
 const redInput = document.querySelector(".red");
 const blueInput = document.querySelector(".blue");
@@ -32,8 +30,8 @@ const codeDisplay = document.querySelector(".code-display");
 const copyCodeButton = document.querySelector(".code-copy-button");
 
 let red = 0;
-let green = 255;
-let blue = 0;
+let green = 45;
+let blue = 45;
 let opacity = 1;
 
 redInput.addEventListener("change", (e) => handleColorChange(e));
@@ -73,8 +71,15 @@ radialOptions.addEventListener("change", () => updateColorDisplay());
 
 function handleColorChange(e) {
   // ***** Handling number checking in a couple different spots, clean up a little?
+  // * Could add check to change e to 0 if entered in input
+  // change input that's too high to max value
   if (e.target.value > 255) e.target.value = 255;
+  // If input is below zero change input to 0
+  // Checking for non number match and below 0 only.
+  // Checking for empty string here provides bad UI experience, as it immediately changes a cleared input field to 0 before new info can be input.
   if (e.target.value < 0 || e.target.value.match(/[^0-9.]/)) e.target.value = 0;
+
+  // check if changing input is for color, percentage, or opacity
   if (e.target.name === "red") {
     red = e.target.value;
   } else if (e.target.name === "blue") {
@@ -89,43 +94,61 @@ function handleColorChange(e) {
     opacity = e.target.value;
   }
 
+  // turn color inputs into their respective hex value
   const hexValArr = [
     parseInt(red).toString(16),
     parseInt(green).toString(16),
     parseInt(blue).toString(16),
   ];
+
+  // Check for empty input, if so change to 00
+  // Empty input comes when input is cleared but still focused (still being changed).
+  // Pad start on single digit inputs. Join array into hex value
   for (let i = 0; i < hexValArr.length; i++) {
     if (hexValArr[i] === "NaN") hexValArr[i] = "00";
     hexValArr[i] = hexValArr[i].padStart(2, "0");
   }
-  hexInput.value = `#${hexValArr.join("")}`;
+  hexInput.value = `#${hexValArr.join("").toUpperCase()}`;
 
-  colorList.currentColor.firstElementChild.style.background = `rgba(${red}, ${green}, ${blue}, ${opacity})`;
+  // Set selected color swatch to current color, update displayed hex
+  colorList.currentColor.children[0].jscolor.fromRGBA(
+    red,
+    green,
+    blue,
+    opacity
+  );
   colorList.currentColor.setAttribute("data-opacity", `${opacity}`);
+  colorList.currentColor.getElementsByTagName("input")[0].value = `#${hexValArr
+    .join("")
+    .toUpperCase()}`;
 
-  colorList.currentColor.getElementsByTagName(
-    "input"
-  )[0].value = `#${hexValArr.join("")}`;
   sortColorList();
   updateColorDisplay();
 }
 
 function handleHexChange(value) {
-  opacity = opacityInput.value;
-  let numValArr;
+  // Change any non hex values to 0
   value = value.replace(/[^0-9a-fA-F]/gm, "0");
 
+  // Change input  to correct length
   if (value.length < 6) {
     value = value.padStart(6, "0");
   }
 
+  // find individual color values from hex, change inputs
   let numArr = value.split(/(.{2})/gm).filter((val) => !!val === true);
-  numValArr = numArr.map((num) => parseInt(num, 16));
+  let numValArr = numArr.map((num) => parseInt(num, 16));
 
+  opacity = opacityInput.value;
   red = redInput.value = numValArr[0];
   green = greenInput.value = numValArr[1];
   blue = blueInput.value = numValArr[2];
-  colorList.currentColor.firstElementChild.style.background = `rgba(${red}, ${green}, ${blue}, ${opacity})`;
+  colorList.currentColor.children[0].jscolor.fromRGBA(
+    red,
+    green,
+    blue,
+    opacity
+  );
   colorList.currentColor.getElementsByTagName("input")[0].value = `#${value}`;
   hexInput.value = `#${value}`;
   sortColorList();
@@ -153,6 +176,7 @@ function updateColorDisplay() {
     linearOptions.style.display = "none";
     radialOptions.style.display = "";
 
+    // Check currently selected position style and shape
     for (let option of gradientPosition) {
       if (option.checked) {
         positionStyle = option.value;
@@ -163,6 +187,8 @@ function updateColorDisplay() {
         shape = option.value;
       }
     }
+
+    // format position output
     if (positionStyle === "keyword") {
       position = `at ${keywordPosition.value}`;
     } else if (positionStyle === "percentage-position") {
@@ -170,8 +196,8 @@ function updateColorDisplay() {
     } else if (positionStyle === "length") {
       let [length, height] = [lengthOne.value, lengthTwo.value];
 
-      // Correct vh units for height of display, not entire window.
-      // ***** weird positioning results with vmax, when not adjusting for
+      // Correct vh units for height of display, not height of viewport
+      // ***** weird positioning results with vmax
       if (
         unitsOne.value === "vh" ||
         (unitsOne.value === "vmax" &&
@@ -208,12 +234,13 @@ function updateColorDisplay() {
     type += `-gradient( ${degreeInput.value}deg, `;
   }
 
+  // Do we need to sort colors here? Can we re use color sort function?
   const colors = [...document.getElementsByClassName("color")];
   colors.sort((a, b) => a.dataset.percent - b.dataset.percent);
 
   const gradientList = colors.map((color) => {
-    let rgb = color.children[0].style.backgroundColor;
-
+    let rgb = color.children[0].dataset.currentColor;
+    // check for rgb instead of rgba. Is this necessary? Should be able to remove alpha denotation
     if (rgb[3] !== "a") {
       rgb =
         rgb.slice(0, 3) +
@@ -225,9 +252,12 @@ function updateColorDisplay() {
     rgb += ` ${color.dataset.percent}%`;
     return rgb;
   });
+
+  // Sets display to last remaining color if all others removed. Otherwise previously removed color will remain
   if (gradientList.length === 1) {
     gradientList[1] = gradientList[0];
   }
+
   const fullBackground = `${type} ${gradientList.join(", ")})`;
   colorDisplay.style.background = fullBackground;
   codeDisplay.innerHTML = "background: " + fullBackground + ";";
@@ -244,4 +274,17 @@ function sortColorList() {
 function addToClipboard() {
   const codeSnippet = document.querySelector(".code-display").innerText;
   navigator.clipboard.writeText(codeSnippet);
+}
+
+function updateIndividualColorSelectors(picker) {
+  redInput.value = red = Math.round(picker.channels.r);
+  greenInput.value = green = Math.round(picker.channels.g);
+  blueInput.value = blue = Math.round(picker.channels.b);
+  opacityInput.value = opacity = picker.channels.a.toFixed(2);
+  hexInput.value = picker.toHEXString();
+  colorList.currentColor.getElementsByTagName("input")[0].value =
+    picker.toHEXString();
+  colorList.currentColor.dataset.opacity = picker.channels.a;
+
+  updateColorDisplay();
 }
