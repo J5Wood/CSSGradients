@@ -171,9 +171,9 @@ h3 {
   grid-column: span 4;
 }
 
-/* .percentage-from-display {
+.hide-display {
   display: none;
-} */
+}
 
 .percent .color-list {
   width: 90%;

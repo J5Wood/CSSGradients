@@ -12,6 +12,7 @@ const greenInput = document.querySelector(".green");
 const opacityInput = document.querySelector(".opacity-number");
 const degreeInput = document.querySelector(".degrees");
 const percentInput = document.querySelector(".percentage-input");
+const percentFromInput = document.querySelector(".percentage-from-input");
 const colorDisplay = document.querySelector(".selection-display");
 const gradientType = document.querySelector("#gradients");
 const gradientPosition = document.getElementsByName("position");
@@ -29,6 +30,10 @@ const lengthTwo = unitsTwo.previousElementSibling;
 const size = document.querySelector(".size");
 const codeDisplay = document.querySelector(".code-display");
 const copyCodeButton = document.querySelector(".code-copy-button");
+const percentageFromDisplay = document.querySelector(
+  ".percentage-from-display"
+);
+const percentageToText = document.querySelector(".percentage-to-text");
 
 let red = 0;
 let green = 45;
@@ -40,6 +45,7 @@ blueInput.addEventListener("change", (e) => handleColorChange(e));
 greenInput.addEventListener("change", (e) => handleColorChange(e));
 opacityInput.addEventListener("change", (e) => handleColorChange(e));
 percentInput.addEventListener("change", (e) => handleColorChange(e));
+percentFromInput.addEventListener("change", (e) => handleColorChange(e));
 hexInput.addEventListener("change", (e) =>
   handleHexChange(e.target.value.slice(1))
 );
@@ -49,13 +55,16 @@ blueInput.addEventListener("keyup", (e) => handleColorChange(e));
 greenInput.addEventListener("keyup", (e) => handleColorChange(e));
 opacityInput.addEventListener("keyup", (e) => handleColorChange(e));
 percentInput.addEventListener("keyup", (e) => handleColorChange(e));
+percentFromInput.addEventListener("keyup", (e) => handleColorChange(e));
 
 redInput.addEventListener("blur", (e) => handleEmptyDeselection(e));
 blueInput.addEventListener("blur", (e) => handleEmptyDeselection(e));
 greenInput.addEventListener("blur", (e) => handleEmptyDeselection(e));
 opacityInput.addEventListener("blur", (e) => handleEmptyDeselection(e));
+``;
 degreeInput.addEventListener("blur", (e) => handleEmptyDeselection(e));
 percentInput.addEventListener("blur", (e) => handleEmptyDeselection(e));
+percentFromInput.addEventListener("blur", (e) => handleEmptyDeselection(e));
 
 degreeInput.addEventListener("change", (e) => updateColorDisplay());
 degreeInput.addEventListener("keyup", (e) => updateColorDisplay());
@@ -63,10 +72,28 @@ degreeInput.addEventListener("keyup", (e) => updateColorDisplay());
 gradientType.addEventListener("change", (e) => {
   // ! showHideIndividualPercentages
   console.log("percent change: ", e.target.value);
+  const fullPercentDisplays = document.querySelectorAll(
+    ".full-percent-display"
+  );
+  const shortPercentDisplays = document.querySelectorAll(".percent-display");
   if (e.target.value === "conic") {
-    console.log(colorList);
-
-    debugger;
+    percentageFromDisplay.classList.remove("hide-display");
+    percentageToText.classList.remove("hide-display");
+    fullPercentDisplays.forEach((fullDisplay) => {
+      fullDisplay.classList.remove("hide-display");
+    });
+    shortPercentDisplays.forEach((shortDisplay) => {
+      shortDisplay.classList.add("hide-display");
+    });
+  } else {
+    percentageFromDisplay.classList.add("hide-display");
+    percentageToText.classList.add("hide-display");
+    fullPercentDisplays.forEach((fullDisplay) => {
+      fullDisplay.classList.add("hide-display");
+    });
+    shortPercentDisplays.forEach((shortDisplay) => {
+      shortDisplay.classList.remove("hide-display");
+    });
   }
   updateColorDisplay();
 });
@@ -96,9 +123,38 @@ function handleColorChange(e) {
     blue = e.target.value;
   } else if (e.target.name === "green") {
     green = e.target.value;
-  } else if (e.target.name === "percentage-input") {
-    colorList.currentColor.dataset.percent = e.target.value;
-    colorList.currentColor.childNodes[1].innerHTML = `${e.target.value}%`;
+  } else if (
+    e.target.name === "percentage-input" ||
+    e.target.name === "percentage-from-input"
+  ) {
+    if (gradientType.value === "conic") {
+      // When Percentage To property changes, also change element data and percentage value for linear and radial options
+      if (e.target.className === "percentage-input") {
+        colorList.currentColor.dataset.percent = e.target.value;
+        // change Percent To
+        const innerText = colorList.currentColor.childNodes[1].innerText;
+        const newText = (innerText.split(
+          "\n"
+        )[0] += `\nTo: ${e.target.value}%`);
+        colorList.currentColor.childNodes[1].innerText = newText;
+        colorList.currentColor.childNodes[2].innerText = ` ${e.target.value}%`;
+        colorList.currentColor.dataset.percent = e.target.value;
+      } else {
+        // change Percent From
+        const innerText = colorList.currentColor.childNodes[1].innerText;
+        const newText = `From: ${e.target.value}%\n` + innerText.split("\n")[1];
+        colorList.currentColor.childNodes[1].innerText = newText;
+      }
+    } else {
+      // If changing percentage on radial and linear options, update To percentage for conic options
+      colorList.currentColor.dataset.percent = e.target.value;
+      colorList.currentColor.childNodes[2].innerHTML = `${e.target.value}%`;
+      const innerText = colorList.currentColor.childNodes[1].innerHTML;
+      const newText = (innerText.split(
+        "<br>"
+      )[0] += `\nTo: ${e.target.value}%`);
+      colorList.currentColor.childNodes[1].innerText = newText;
+    }
   } else {
     if (e.target.value > 1) e.target.value = 1;
     opacity = e.target.value;
@@ -276,6 +332,7 @@ function updateColorDisplay() {
 
   const fullBackground = `${type} ${gradientList.join(", ")})`;
   colorDisplay.style.background = fullBackground;
+  ``;
   codeDisplay.innerHTML = "background: " + fullBackground + ";";
 }
 

@@ -19,7 +19,7 @@ class Color {
     this.percent = percent;
     this.selectColor = selectColor;
     this.removeColor = removeColor;
-    this.percentFrom = percentFrom;
+    this.percentFrom = percent;
     this.id = id;
   }
 
@@ -43,10 +43,11 @@ class Color {
     colorSwatch.dataset.currentColor = `rgba(${this.red},${this.green},${this.blue},${this.opacity})`;
 
     const fullPercentDisplay = document.createElement("span");
-    fullPercentDisplay;
-    fullPercentDisplay.innerText = `From: ${this.percentFrom}\nTo: ${this.percent}%`;
+    fullPercentDisplay.classList.add("full-percent-display", "hide-display");
+    fullPercentDisplay.innerText = `From: ${this.percentFrom}%\nTo: ${this.percent}%`;
 
     const percentDisplay = document.createElement("span");
+    percentDisplay.classList.add("percent-display");
     percentDisplay.innerText = ` ${this.percent}%`;
 
     const input = document.createElement("input");
@@ -64,6 +65,7 @@ class Color {
     button.addEventListener("click", (e) => this.removeColor(e, this));
 
     newItem.appendChild(colorSwatch);
+    newItem.appendChild(fullPercentDisplay);
     newItem.appendChild(percentDisplay);
     newItem.appendChild(input);
     newItem.appendChild(button);
