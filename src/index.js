@@ -17,10 +17,11 @@ const gradientType = document.querySelector("#gradients");
 const gradientPosition = document.getElementsByName("position");
 const linearOptions = document.querySelector(".linear-options");
 const radialOptions = document.querySelector(".radial-options");
+const conicOptions = document.querySelector(".conic-options");
 const radialShapes = document.getElementsByName("shape");
 const keywordPosition = document.querySelector(".keyword-position");
-const percentageOne = document.querySelector("#percentage-one");
-const percentageTwo = document.querySelector("#percentage-two");
+const radialPercentageOne = document.querySelector("#percentage-one");
+const radialPercentageTwo = document.querySelector("#percentage-two");
 const unitsOne = document.querySelector("#units-one");
 const lengthOne = unitsOne.previousElementSibling;
 const unitsTwo = document.querySelector("#units-two");
@@ -59,7 +60,16 @@ percentInput.addEventListener("blur", (e) => handleEmptyDeselection(e));
 degreeInput.addEventListener("change", (e) => updateColorDisplay());
 degreeInput.addEventListener("keyup", (e) => updateColorDisplay());
 
-gradientType.addEventListener("change", () => updateColorDisplay());
+gradientType.addEventListener("change", (e) => {
+  // ! showHideIndividualPercentages
+  console.log("percent change: ", e.target.value);
+  if (e.target.value === "conic") {
+    console.log(colorList);
+
+    debugger;
+  }
+  updateColorDisplay();
+});
 
 copyCodeButton.addEventListener("click", (e) => addToClipboard(e));
 
@@ -174,6 +184,7 @@ function updateColorDisplay() {
 
   if (type === "radial") {
     linearOptions.style.display = "none";
+    conicOptions.style.display = "none";
     radialOptions.style.display = "";
 
     // Check currently selected position style and shape
@@ -192,7 +203,7 @@ function updateColorDisplay() {
     if (positionStyle === "keyword") {
       position = `at ${keywordPosition.value}`;
     } else if (positionStyle === "percentage-position") {
-      position = `at ${percentageOne.value}% ${percentageTwo.value}%`;
+      position = `at ${radialPercentageOne.value}% ${radialPercentageTwo.value}%`;
     } else if (positionStyle === "length") {
       let [length, height] = [lengthOne.value, lengthTwo.value];
 
@@ -228,8 +239,13 @@ function updateColorDisplay() {
     }
 
     type = `${type}-gradient(${shape} ${size.value} ${position},`;
+  } else if (type === "conic") {
+    radialOptions.style.display = "none";
+    linearOptions.style.display = "none";
+    conicOptions.style.display = "";
   } else {
     radialOptions.style.display = "none";
+    conicOptions.style.display = "none";
     linearOptions.style.display = "";
     type += `-gradient( ${degreeInput.value}deg, `;
   }

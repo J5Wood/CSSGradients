@@ -3,9 +3,15 @@ class ColorList {
     this.list = document.querySelector(".color-list");
     this.addColorButton = document.querySelector(".add-color-button");
     this.addColorButton.addEventListener("click", this.addNewColor.bind(this));
+    this.uuid = 0;
+    this.colors = {};
     this.addInitialColors();
     this.currentColor = document.getElementsByClassName("color")[0];
     this.currentColor.classList.add("selected-color");
+  }
+
+  incrementId() {
+    this.uuid += 1;
   }
 
   handleColorSelection(e) {
@@ -33,9 +39,12 @@ class ColorList {
       percent: percentInput.value,
       selectColor: this.handleColorSelection.bind(this),
       removeColor: this.removeColor.bind(this),
+      percentFrom: null,
+      id: this.uuid,
     };
+    this.incrementId();
     const newColor = new Color(colorObj);
-
+    this.colors[newColor.id] = newColor;
     this.list.insertBefore(newColor.render(), this.list.lastElementChild);
     jscolor.install();
     this.sortList();
@@ -48,7 +57,8 @@ class ColorList {
     colorListChildren.forEach((node) => this.list.appendChild(node));
   }
 
-  removeColor(e) {
+  removeColor(e, node) {
+    delete this.colors[node.id];
     e.target.parentElement.remove();
     e.stopPropagation();
     updateColorDisplay();

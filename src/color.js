@@ -8,6 +8,8 @@ class Color {
     percent,
     selectColor,
     removeColor,
+    percentFrom,
+    id,
   }) {
     this.red = red;
     this.green = green;
@@ -17,7 +19,16 @@ class Color {
     this.percent = percent;
     this.selectColor = selectColor;
     this.removeColor = removeColor;
+    this.percentFrom = percentFrom;
+    this.id = id;
   }
+
+  // renderPercentages() {
+
+  //   if(this.percentFrom || this.percentTo) {
+  //     const percentElement = document.createElement("span");
+  //   }
+  // }
 
   render() {
     const newItem = document.createElement("li");
@@ -31,8 +42,12 @@ class Color {
     colorSwatch.dataset.jscolor = `{preset:'dark', width:250, value:'rgba(${this.red},${this.green},${this.blue},${this.opacity})', onChange: 'updateIndividualColorSelectors(this)', onInput: 'updateIndividualColorSelectors(this)'}`;
     colorSwatch.dataset.currentColor = `rgba(${this.red},${this.green},${this.blue},${this.opacity})`;
 
-    const info = document.createElement("span");
-    info.innerText = ` ${this.percent}%`;
+    const fullPercentDisplay = document.createElement("span");
+    fullPercentDisplay;
+    fullPercentDisplay.innerText = `From: ${this.percentFrom}\nTo: ${this.percent}%`;
+
+    const percentDisplay = document.createElement("span");
+    percentDisplay.innerText = ` ${this.percent}%`;
 
     const input = document.createElement("input");
     input.setAttribute("name", "color-input");
@@ -46,11 +61,10 @@ class Color {
     const button = document.createElement("button");
     button.classList.add("delete-color-button");
     button.innerText = "X";
-
-    button.addEventListener("click", (e) => this.removeColor(e));
+    button.addEventListener("click", (e) => this.removeColor(e, this));
 
     newItem.appendChild(colorSwatch);
-    newItem.appendChild(info);
+    newItem.appendChild(percentDisplay);
     newItem.appendChild(input);
     newItem.appendChild(button);
     newItem.addEventListener("click", (e) => this.selectColor(e));

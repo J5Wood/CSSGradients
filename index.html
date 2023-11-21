@@ -15,6 +15,7 @@
         <select id="gradients" class="gradient-type">
           <option value="radial">Radial Gradient</option>
           <option value="linear">Linear Gradient</option>
+          <option value="conic">Conic Gradient</option>
         </select>
       </span>
       <div class="selection-display"></div>
@@ -148,6 +149,22 @@
           </span>
         </span>
 
+        <span class="conic-options main-background">
+          <!-- from #NUM turns or #NUM degrees at #X% #Y%, color, optional start
+          degree and end degree, color, optional start degree and end degree,
+          color, optional start degree and end degree -->
+          <label for="degrees">Degrees: </label>
+          <input
+            type="number"
+            id="degrees"
+            step="1"
+            min="0"
+            max="359"
+            value="90"
+            class="degrees"
+          />°
+        </span>
+
         <ul class="color-list main-background">
           <button class="add-color-button">+</button>
         </ul>
@@ -223,23 +240,45 @@
               class="opacity-number"
             />
           </label>
+          <span class="main-background percentage-container">
+            <label
+              for="percentage-from-input"
+              class="percentage-from-display"
+              style="display: none"
+              >Percentage From:
+              <span>
+                <input
+                  type="number"
+                  name="percentage-from-input"
+                  id="percentage-from-input"
+                  step="1"
+                  min="0"
+                  max="100"
+                  value="0"
+                  class="percentage-from-input"
+                />
+                <i class="input-icon">%</i>
+              </span>
+              <br />
+            </label>
 
-          <label for="percentage-input" class="main-background"
-            >Percentage:
-            <span>
-              <input
-                type="number"
-                name="percentage-input"
-                id="percentage-input"
-                step="1"
-                min="0"
-                max="100"
-                value="0"
-                class="percentage-input"
-              />
-              <i class="input-icon">%</i>
-            </span>
-          </label>
+            <label for="percentage-input"
+              >Percentage<span class="percentage-from-display"> To</span>:
+              <span>
+                <input
+                  type="number"
+                  name="percentage-input"
+                  id="percentage-input"
+                  step="1"
+                  min="0"
+                  max="100"
+                  value="0"
+                  class="percentage-input"
+                />
+                <i class="input-icon">%</i>
+              </span>
+            </label>
+          </span>
         </div>
       </div>
     </main>
