@@ -34,6 +34,22 @@ const percentageFromDisplay = document.querySelector(
   ".percentage-from-display"
 );
 const percentageToText = document.querySelector(".percentage-to-text");
+const conicInputFromTypes = document.querySelectorAll("[name=conic-type]");
+const conicDegrees = document.querySelector("#conic-degrees");
+const conicRads = document.querySelector("#conic-rads");
+const conicTurns = document.querySelector("#conic-turns");
+
+conicDegrees.addEventListener("change", () => {
+  handleConicChange();
+});
+
+conicRads.addEventListener("change", () => {
+  handleConicChange();
+});
+
+conicTurns.addEventListener("change", () => {
+  handleConicChange();
+});
 
 let red = 0;
 let green = 45;
@@ -299,6 +315,23 @@ function updateColorDisplay() {
     radialOptions.style.display = "none";
     linearOptions.style.display = "none";
     conicOptions.style.display = "";
+
+    let conicFrom;
+
+    if (conicInputFromTypes[0].checked) {
+      // from degrees
+      conicFrom = "deg";
+    } else if (conicInputFromTypes[1].checked) {
+      // from turns
+      conicFrom = "turn";
+    } else {
+      conicFrom = "rad";
+    }
+    console.log(conic - from);
+
+    type += `-gradient(from ${
+      (conicFromValue, conicFrom)
+    } at ${conicPercentInputOne}% ${conicPercentInputTwo}%, `;
   } else {
     radialOptions.style.display = "none";
     conicOptions.style.display = "none";

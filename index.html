@@ -153,7 +153,41 @@
           <!-- from #NUM turns or #NUM degrees at #X% #Y%, color, optional start
           degree and end degree, color, optional start degree and end degree,
           color, optional start degree and end degree -->
-          <label for="degrees">Degrees: </label>
+          FROM deg or turns
+
+          <span class="conic-from-types">
+            <label for="conic-degrees">
+              <input
+                type="radio"
+                name="conic-type"
+                id="conic-degrees"
+                value="degrees"
+                checked="true"
+              />
+              Degrees
+            </label>
+            <label for="conic-turns">
+              <input
+                type="radio"
+                name="conic-type"
+                id="conic-turns"
+                value="turns"
+              />
+              Turns
+            </label>
+            <label for="conic-rads">
+              <input
+                type="radio"
+                name="conic-type"
+                id="conic-rads"
+                value="rad"
+              />
+              Radians
+            </label>
+          </span>
+
+          <!-- <label for="degrees">Degrees: </label>
+
           <input
             type="number"
             id="degrees"
@@ -162,7 +196,7 @@
             max="359"
             value="90"
             class="degrees"
-          />°
+          />° -->
         </span>
 
         <ul class="color-list main-background">
