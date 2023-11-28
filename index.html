@@ -153,15 +153,20 @@
           <!-- from #NUM turns or #NUM degrees at #X% #Y%, color, optional start
           degree and end degree, color, optional start degree and end degree,
           color, optional start degree and end degree -->
-          FROM deg or turns
-
           <span class="conic-from-types">
+            FROM:
+            <input
+              type="number"
+              name="conic-from-value"
+              id="conic-from-value"
+              value="0"
+            />
             <label for="conic-degrees">
               <input
                 type="radio"
                 name="conic-type"
                 id="conic-degrees"
-                value="degrees"
+                value="deg"
                 checked="true"
               />
               Degrees
@@ -171,7 +176,7 @@
                 type="radio"
                 name="conic-type"
                 id="conic-turns"
-                value="turns"
+                value="turn"
               />
               Turns
             </label>
@@ -185,18 +190,21 @@
               Radians
             </label>
           </span>
-
-          <!-- <label for="degrees">Degrees: </label>
-
-          <input
-            type="number"
-            id="degrees"
-            step="1"
-            min="0"
-            max="359"
-            value="90"
-            class="degrees"
-          />° -->
+          <span class="conic-at-percentages">
+            AT:
+            <input
+              type="number"
+              name="conic-at-percentage-one"
+              id="conic-at-percentage-one"
+              value="0"
+            />%
+            <input
+              type="number"
+              name="conic-at-percentage-two"
+              id="conic-at-percentage-two"
+              value="0"
+            />%
+          </span>
         </span>
 
         <ul class="color-list main-background">
@@ -279,15 +287,13 @@
             <label
               for="percentage-from-input"
               class="percentage-from-display hide-display"
-              >Percentage From:
+              >From
               <span>
                 <input
                   type="number"
                   name="percentage-from-input"
                   id="percentage-from-input"
                   step="1"
-                  min="0"
-                  max="100"
                   value="0"
                   class="percentage-from-input"
                 />
@@ -297,17 +303,14 @@
             </label>
 
             <label for="percentage-input"
-              >Percentage<span class="percentage-to-text hide-display"> To</span
-              >:
+              ><span class="percentage-to-text hide-display">To </span>
               <span>
                 <input
                   type="number"
                   name="percentage-input"
                   id="percentage-input"
                   step="1"
-                  min="0"
-                  max="100"
-                  value="0"
+                  value="50"
                   class="percentage-input"
                 />
                 <i class="input-icon">%</i>

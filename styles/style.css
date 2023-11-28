@@ -118,6 +118,9 @@ h3 {
 
 .conic-options {
   grid-column: 1 / span 2;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
 }
 
 .color-input {

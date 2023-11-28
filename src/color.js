@@ -1,16 +1,19 @@
 class Color {
-  constructor({
-    red,
-    green,
-    blue,
-    opacity,
-    hex,
-    percent,
-    selectColor,
-    removeColor,
-    percentFrom,
-    id,
-  }) {
+  constructor(
+    {
+      red,
+      green,
+      blue,
+      opacity,
+      hex,
+      percent,
+      percentFrom,
+      selectColor,
+      removeColor,
+      id,
+    },
+    isConic
+  ) {
     this.red = red;
     this.green = green;
     this.blue = blue;
@@ -19,21 +22,16 @@ class Color {
     this.percent = percent;
     this.selectColor = selectColor;
     this.removeColor = removeColor;
-    this.percentFrom = percent;
+    this.percentFrom = percentFrom;
     this.id = id;
+    this.isConic = isConic;
   }
-
-  // renderPercentages() {
-
-  //   if(this.percentFrom || this.percentTo) {
-  //     const percentElement = document.createElement("span");
-  //   }
-  // }
 
   render() {
     const newItem = document.createElement("li");
     newItem.classList.add("color");
     newItem.setAttribute("data-opacity", this.opacity);
+    newItem.setAttribute("data-percent-from", this.percentFrom);
     newItem.setAttribute("data-percent", this.percent);
 
     const colorSwatch = document.createElement("button");
@@ -43,12 +41,18 @@ class Color {
     colorSwatch.dataset.currentColor = `rgba(${this.red},${this.green},${this.blue},${this.opacity})`;
 
     const fullPercentDisplay = document.createElement("span");
-    fullPercentDisplay.classList.add("full-percent-display", "hide-display");
-    fullPercentDisplay.innerText = `From: ${this.percentFrom}%\nTo: ${this.percent}%`;
+    fullPercentDisplay.classList.add("conic-display-element");
+    fullPercentDisplay.innerText = `From: ${this.percentFrom} \nTo: ${this.percent}`;
 
     const percentDisplay = document.createElement("span");
     percentDisplay.classList.add("percent-display");
     percentDisplay.innerText = ` ${this.percent}%`;
+
+    if (this.isConic) {
+      percentDisplay.classList.add("hide-display");
+    } else {
+      fullPercentDisplay.classList.add("hide-display");
+    }
 
     const input = document.createElement("input");
     input.setAttribute("name", "color-input");

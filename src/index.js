@@ -34,22 +34,11 @@ const percentageFromDisplay = document.querySelector(
   ".percentage-from-display"
 );
 const percentageToText = document.querySelector(".percentage-to-text");
-const conicInputFromTypes = document.querySelectorAll("[name=conic-type]");
-const conicDegrees = document.querySelector("#conic-degrees");
-const conicRads = document.querySelector("#conic-rads");
-const conicTurns = document.querySelector("#conic-turns");
-
-conicDegrees.addEventListener("change", () => {
-  handleConicChange();
-});
-
-conicRads.addEventListener("change", () => {
-  handleConicChange();
-});
-
-conicTurns.addEventListener("change", () => {
-  handleConicChange();
-});
+const conicInputType = document.querySelectorAll("[name=conic-type]");
+const conicFromValue = document.querySelector("#conic-from-value");
+const conicPercentInputOne = document.querySelector("#conic-at-percentage-one");
+const conicPercentInputTwo = document.querySelector("#conic-at-percentage-two");
+const measurementIcons = document.querySelectorAll(".input-icon");
 
 let red = 0;
 let green = 45;
@@ -77,7 +66,6 @@ redInput.addEventListener("blur", (e) => handleEmptyDeselection(e));
 blueInput.addEventListener("blur", (e) => handleEmptyDeselection(e));
 greenInput.addEventListener("blur", (e) => handleEmptyDeselection(e));
 opacityInput.addEventListener("blur", (e) => handleEmptyDeselection(e));
-``;
 degreeInput.addEventListener("blur", (e) => handleEmptyDeselection(e));
 percentInput.addEventListener("blur", (e) => handleEmptyDeselection(e));
 percentFromInput.addEventListener("blur", (e) => handleEmptyDeselection(e));
@@ -85,31 +73,50 @@ percentFromInput.addEventListener("blur", (e) => handleEmptyDeselection(e));
 degreeInput.addEventListener("change", (e) => updateColorDisplay());
 degreeInput.addEventListener("keyup", (e) => updateColorDisplay());
 
+conicOptions.addEventListener("change", (e) => updateColorDisplay(e));
+conicInputType.forEach((input) =>
+  input.addEventListener("change", (e) => {
+    measurementIcons.forEach((icon) => (icon.innerText = e.target.value));
+  })
+);
+
 gradientType.addEventListener("change", (e) => {
-  // ! showHideIndividualPercentages
-  console.log("percent change: ", e.target.value);
-  const fullPercentDisplays = document.querySelectorAll(
-    ".full-percent-display"
+  const conicDisplayElements = document.querySelectorAll(
+    ".conic-display-element"
   );
-  const shortPercentDisplays = document.querySelectorAll(".percent-display");
+  const percentageDisplayElements =
+    document.querySelectorAll(".percent-display");
   if (e.target.value === "conic") {
+    let conicFrom;
+    if (conicInputType[0].checked) {
+      // from degrees
+      conicFrom = "deg";
+    } else if (conicInputType[1].checked) {
+      // from turns
+      conicFrom = "turn";
+    } else {
+      conicFrom = "rad";
+    }
+
     percentageFromDisplay.classList.remove("hide-display");
     percentageToText.classList.remove("hide-display");
-    fullPercentDisplays.forEach((fullDisplay) => {
-      fullDisplay.classList.remove("hide-display");
+    conicDisplayElements.forEach((conicElement) => {
+      conicElement.classList.remove("hide-display");
     });
-    shortPercentDisplays.forEach((shortDisplay) => {
-      shortDisplay.classList.add("hide-display");
+    percentageDisplayElements.forEach((percentageElement) => {
+      percentageElement.classList.add("hide-display");
     });
+    measurementIcons.forEach((icon) => (icon.innerText = conicFrom));
   } else {
     percentageFromDisplay.classList.add("hide-display");
     percentageToText.classList.add("hide-display");
-    fullPercentDisplays.forEach((fullDisplay) => {
-      fullDisplay.classList.add("hide-display");
+    conicDisplayElements.forEach((conicElement) => {
+      conicElement.classList.add("hide-display");
     });
-    shortPercentDisplays.forEach((shortDisplay) => {
-      shortDisplay.classList.remove("hide-display");
+    percentageDisplayElements.forEach((percentageElement) => {
+      percentageElement.classList.remove("hide-display");
     });
+    measurementIcons.forEach((icon) => (icon.innerText = "%"));
   }
   updateColorDisplay();
 });
@@ -126,7 +133,12 @@ function handleColorChange(e) {
   // ***** Handling number checking in a couple different spots, clean up a little?
   // * Could add check to change e to 0 if entered in input
   // change input that's too high to max value
-  if (e.target.value > 255) e.target.value = 255;
+  if (
+    e.target.value > 255 &&
+    e.target.name !== "percentage-input" &&
+    e.target.name !== "percentage-from-input"
+  )
+    e.target.value = 255;
   // If input is below zero change input to 0
   // Checking for non number match and below 0 only.
   // Checking for empty string here provides bad UI experience, as it immediately changes a cleared input field to 0 before new info can be input.
@@ -146,20 +158,18 @@ function handleColorChange(e) {
     if (gradientType.value === "conic") {
       // When Percentage To property changes, also change element data and percentage value for linear and radial options
       if (e.target.className === "percentage-input") {
-        colorList.currentColor.dataset.percent = e.target.value;
         // change Percent To
         const innerText = colorList.currentColor.childNodes[1].innerText;
-        const newText = (innerText.split(
-          "\n"
-        )[0] += `\nTo: ${e.target.value}%`);
+        const newText = (innerText.split("\n")[0] += `\nTo: ${e.target.value}`);
         colorList.currentColor.childNodes[1].innerText = newText;
-        colorList.currentColor.childNodes[2].innerText = ` ${e.target.value}%`;
+        colorList.currentColor.childNodes[2].innerText = ` ${e.target.value}`;
         colorList.currentColor.dataset.percent = e.target.value;
       } else {
         // change Percent From
         const innerText = colorList.currentColor.childNodes[1].innerText;
-        const newText = `From: ${e.target.value}%\n` + innerText.split("\n")[1];
+        const newText = `From: ${e.target.value}\n` + innerText.split("\n")[1];
         colorList.currentColor.childNodes[1].innerText = newText;
+        colorList.currentColor.dataset.percentFrom = e.target.value;
       }
     } else {
       // If changing percentage on radial and linear options, update To percentage for conic options
@@ -254,6 +264,18 @@ function updateColorDisplay() {
   let positionStyle, position, shape;
   let type = gradientType.value;
 
+  // Can maybe handle this better. Only need to use this for conic gradients, currently running every time. Need to use variable in current level of scope in function later.
+  let conicFrom;
+  if (conicInputType[0].checked) {
+    // from degrees
+    conicFrom = "deg";
+  } else if (conicInputType[1].checked) {
+    // from turns
+    conicFrom = "turn";
+  } else {
+    conicFrom = "rad";
+  }
+
   if (type === "radial") {
     linearOptions.style.display = "none";
     conicOptions.style.display = "none";
@@ -316,22 +338,9 @@ function updateColorDisplay() {
     linearOptions.style.display = "none";
     conicOptions.style.display = "";
 
-    let conicFrom;
-
-    if (conicInputFromTypes[0].checked) {
-      // from degrees
-      conicFrom = "deg";
-    } else if (conicInputFromTypes[1].checked) {
-      // from turns
-      conicFrom = "turn";
-    } else {
-      conicFrom = "rad";
-    }
-    console.log(conic - from);
-
-    type += `-gradient(from ${
-      (conicFromValue, conicFrom)
-    } at ${conicPercentInputOne}% ${conicPercentInputTwo}%, `;
+    type += `-gradient(from ${conicFromValue.value + conicFrom} at ${
+      conicPercentInputOne.value
+    }% ${conicPercentInputTwo.value}%, `;
   } else {
     radialOptions.style.display = "none";
     conicOptions.style.display = "none";
@@ -354,7 +363,13 @@ function updateColorDisplay() {
         `, ${color.dataset.opacity}` +
         rgb.slice(rgb.length - 1);
     }
-    rgb += ` ${color.dataset.percent}%`;
+
+    // if conic add that, otherwise continue
+    if (gradientType.value === "conic") {
+      rgb += ` ${color.dataset.percentFrom}${conicFrom} ${color.dataset.percent}${conicFrom}`;
+    } else {
+      rgb += ` ${color.dataset.percent}%`;
+    }
     return rgb;
   });
 
@@ -365,7 +380,6 @@ function updateColorDisplay() {
 
   const fullBackground = `${type} ${gradientList.join(", ")})`;
   colorDisplay.style.background = fullBackground;
-  ``;
   codeDisplay.innerHTML = "background: " + fullBackground + ";";
 }
 
