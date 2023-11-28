@@ -116,6 +116,13 @@ h3 {
   flex-direction: column;
 }
 
+.conic-options {
+  grid-column: 1 / span 2;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
 .color-input {
   display: grid;
   gap: 15px;
@@ -137,7 +144,7 @@ h3 {
 }
 
 .color-input > label:nth-child(n + 5) {
-  grid-column: span 3;
+  grid-column: span 2;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 1fr;
@@ -159,7 +166,19 @@ h3 {
   max-width: 80px;
 }
 
-.color-list {
+.percentage-container {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  grid-template-columns: 1fr;
+  align-items: center;
+  grid-column: span 4;
+}
+
+.hide-display {
+  display: none;
+}
+
+.percent .color-list {
   width: 90%;
   padding: 10px;
   margin: 0;

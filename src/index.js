@@ -12,15 +12,17 @@ const greenInput = document.querySelector(".green");
 const opacityInput = document.querySelector(".opacity-number");
 const degreeInput = document.querySelector(".degrees");
 const percentInput = document.querySelector(".percentage-input");
+const percentFromInput = document.querySelector(".percentage-from-input");
 const colorDisplay = document.querySelector(".selection-display");
 const gradientType = document.querySelector("#gradients");
 const gradientPosition = document.getElementsByName("position");
 const linearOptions = document.querySelector(".linear-options");
 const radialOptions = document.querySelector(".radial-options");
+const conicOptions = document.querySelector(".conic-options");
 const radialShapes = document.getElementsByName("shape");
 const keywordPosition = document.querySelector(".keyword-position");
-const percentageOne = document.querySelector("#percentage-one");
-const percentageTwo = document.querySelector("#percentage-two");
+const radialPercentageOne = document.querySelector("#percentage-one");
+const radialPercentageTwo = document.querySelector("#percentage-two");
 const unitsOne = document.querySelector("#units-one");
 const lengthOne = unitsOne.previousElementSibling;
 const unitsTwo = document.querySelector("#units-two");
@@ -28,6 +30,15 @@ const lengthTwo = unitsTwo.previousElementSibling;
 const size = document.querySelector(".size");
 const codeDisplay = document.querySelector(".code-display");
 const copyCodeButton = document.querySelector(".code-copy-button");
+const percentageFromDisplay = document.querySelector(
+  ".percentage-from-display"
+);
+const percentageToText = document.querySelector(".percentage-to-text");
+const conicInputType = document.querySelectorAll("[name=conic-type]");
+const conicFromValue = document.querySelector("#conic-from-value");
+const conicPercentInputOne = document.querySelector("#conic-at-percentage-one");
+const conicPercentInputTwo = document.querySelector("#conic-at-percentage-two");
+const measurementIcons = document.querySelectorAll(".input-icon");
 
 let red = 0;
 let green = 45;
@@ -39,6 +50,7 @@ blueInput.addEventListener("change", (e) => handleColorChange(e));
 greenInput.addEventListener("change", (e) => handleColorChange(e));
 opacityInput.addEventListener("change", (e) => handleColorChange(e));
 percentInput.addEventListener("change", (e) => handleColorChange(e));
+percentFromInput.addEventListener("change", (e) => handleColorChange(e));
 hexInput.addEventListener("change", (e) =>
   handleHexChange(e.target.value.slice(1))
 );
@@ -48,6 +60,7 @@ blueInput.addEventListener("keyup", (e) => handleColorChange(e));
 greenInput.addEventListener("keyup", (e) => handleColorChange(e));
 opacityInput.addEventListener("keyup", (e) => handleColorChange(e));
 percentInput.addEventListener("keyup", (e) => handleColorChange(e));
+percentFromInput.addEventListener("keyup", (e) => handleColorChange(e));
 
 redInput.addEventListener("blur", (e) => handleEmptyDeselection(e));
 blueInput.addEventListener("blur", (e) => handleEmptyDeselection(e));
@@ -55,11 +68,58 @@ greenInput.addEventListener("blur", (e) => handleEmptyDeselection(e));
 opacityInput.addEventListener("blur", (e) => handleEmptyDeselection(e));
 degreeInput.addEventListener("blur", (e) => handleEmptyDeselection(e));
 percentInput.addEventListener("blur", (e) => handleEmptyDeselection(e));
+percentFromInput.addEventListener("blur", (e) => handleEmptyDeselection(e));
 
 degreeInput.addEventListener("change", (e) => updateColorDisplay());
 degreeInput.addEventListener("keyup", (e) => updateColorDisplay());
 
-gradientType.addEventListener("change", () => updateColorDisplay());
+conicOptions.addEventListener("change", (e) => updateColorDisplay(e));
+conicInputType.forEach((input) =>
+  input.addEventListener("change", (e) => {
+    measurementIcons.forEach((icon) => (icon.innerText = e.target.value));
+  })
+);
+
+gradientType.addEventListener("change", (e) => {
+  const conicDisplayElements = document.querySelectorAll(
+    ".conic-display-element"
+  );
+  const percentageDisplayElements =
+    document.querySelectorAll(".percent-display");
+  if (e.target.value === "conic") {
+    let conicFrom;
+    if (conicInputType[0].checked) {
+      // from degrees
+      conicFrom = "deg";
+    } else if (conicInputType[1].checked) {
+      // from turns
+      conicFrom = "turn";
+    } else {
+      conicFrom = "rad";
+    }
+
+    percentageFromDisplay.classList.remove("hide-display");
+    percentageToText.classList.remove("hide-display");
+    conicDisplayElements.forEach((conicElement) => {
+      conicElement.classList.remove("hide-display");
+    });
+    percentageDisplayElements.forEach((percentageElement) => {
+      percentageElement.classList.add("hide-display");
+    });
+    measurementIcons.forEach((icon) => (icon.innerText = conicFrom));
+  } else {
+    percentageFromDisplay.classList.add("hide-display");
+    percentageToText.classList.add("hide-display");
+    conicDisplayElements.forEach((conicElement) => {
+      conicElement.classList.add("hide-display");
+    });
+    percentageDisplayElements.forEach((percentageElement) => {
+      percentageElement.classList.remove("hide-display");
+    });
+    measurementIcons.forEach((icon) => (icon.innerText = "%"));
+  }
+  updateColorDisplay();
+});
 
 copyCodeButton.addEventListener("click", (e) => addToClipboard(e));
 
@@ -73,7 +133,12 @@ function handleColorChange(e) {
   // ***** Handling number checking in a couple different spots, clean up a little?
   // * Could add check to change e to 0 if entered in input
   // change input that's too high to max value
-  if (e.target.value > 255) e.target.value = 255;
+  if (
+    e.target.value > 255 &&
+    e.target.name !== "percentage-input" &&
+    e.target.name !== "percentage-from-input"
+  )
+    e.target.value = 255;
   // If input is below zero change input to 0
   // Checking for non number match and below 0 only.
   // Checking for empty string here provides bad UI experience, as it immediately changes a cleared input field to 0 before new info can be input.
@@ -86,9 +151,36 @@ function handleColorChange(e) {
     blue = e.target.value;
   } else if (e.target.name === "green") {
     green = e.target.value;
-  } else if (e.target.name === "percentage-input") {
-    colorList.currentColor.dataset.percent = e.target.value;
-    colorList.currentColor.childNodes[1].innerHTML = `${e.target.value}%`;
+  } else if (
+    e.target.name === "percentage-input" ||
+    e.target.name === "percentage-from-input"
+  ) {
+    if (gradientType.value === "conic") {
+      // When Percentage To property changes, also change element data and percentage value for linear and radial options
+      if (e.target.className === "percentage-input") {
+        // change Percent To
+        const innerText = colorList.currentColor.childNodes[1].innerText;
+        const newText = (innerText.split("\n")[0] += `\nTo: ${e.target.value}`);
+        colorList.currentColor.childNodes[1].innerText = newText;
+        colorList.currentColor.childNodes[2].innerText = ` ${e.target.value}`;
+        colorList.currentColor.dataset.percent = e.target.value;
+      } else {
+        // change Percent From
+        const innerText = colorList.currentColor.childNodes[1].innerText;
+        const newText = `From: ${e.target.value}\n` + innerText.split("\n")[1];
+        colorList.currentColor.childNodes[1].innerText = newText;
+        colorList.currentColor.dataset.percentFrom = e.target.value;
+      }
+    } else {
+      // If changing percentage on radial and linear options, update To percentage for conic options
+      colorList.currentColor.dataset.percent = e.target.value;
+      colorList.currentColor.childNodes[2].innerHTML = `${e.target.value}%`;
+      const innerText = colorList.currentColor.childNodes[1].innerHTML;
+      const newText = (innerText.split(
+        "<br>"
+      )[0] += `\nTo: ${e.target.value}%`);
+      colorList.currentColor.childNodes[1].innerText = newText;
+    }
   } else {
     if (e.target.value > 1) e.target.value = 1;
     opacity = e.target.value;
@@ -172,8 +264,21 @@ function updateColorDisplay() {
   let positionStyle, position, shape;
   let type = gradientType.value;
 
+  // Can maybe handle this better. Only need to use this for conic gradients, currently running every time. Need to use variable in current level of scope in function later.
+  let conicFrom;
+  if (conicInputType[0].checked) {
+    // from degrees
+    conicFrom = "deg";
+  } else if (conicInputType[1].checked) {
+    // from turns
+    conicFrom = "turn";
+  } else {
+    conicFrom = "rad";
+  }
+
   if (type === "radial") {
     linearOptions.style.display = "none";
+    conicOptions.style.display = "none";
     radialOptions.style.display = "";
 
     // Check currently selected position style and shape
@@ -192,7 +297,7 @@ function updateColorDisplay() {
     if (positionStyle === "keyword") {
       position = `at ${keywordPosition.value}`;
     } else if (positionStyle === "percentage-position") {
-      position = `at ${percentageOne.value}% ${percentageTwo.value}%`;
+      position = `at ${radialPercentageOne.value}% ${radialPercentageTwo.value}%`;
     } else if (positionStyle === "length") {
       let [length, height] = [lengthOne.value, lengthTwo.value];
 
@@ -228,8 +333,17 @@ function updateColorDisplay() {
     }
 
     type = `${type}-gradient(${shape} ${size.value} ${position},`;
+  } else if (type === "conic") {
+    radialOptions.style.display = "none";
+    linearOptions.style.display = "none";
+    conicOptions.style.display = "";
+
+    type += `-gradient(from ${conicFromValue.value + conicFrom} at ${
+      conicPercentInputOne.value
+    }% ${conicPercentInputTwo.value}%, `;
   } else {
     radialOptions.style.display = "none";
+    conicOptions.style.display = "none";
     linearOptions.style.display = "";
     type += `-gradient( ${degreeInput.value}deg, `;
   }
@@ -249,7 +363,13 @@ function updateColorDisplay() {
         `, ${color.dataset.opacity}` +
         rgb.slice(rgb.length - 1);
     }
-    rgb += ` ${color.dataset.percent}%`;
+
+    // if conic add that, otherwise continue
+    if (gradientType.value === "conic") {
+      rgb += ` ${color.dataset.percentFrom}${conicFrom} ${color.dataset.percent}${conicFrom}`;
+    } else {
+      rgb += ` ${color.dataset.percent}%`;
+    }
     return rgb;
   });
 

@@ -3,9 +3,15 @@ class ColorList {
     this.list = document.querySelector(".color-list");
     this.addColorButton = document.querySelector(".add-color-button");
     this.addColorButton.addEventListener("click", this.addNewColor.bind(this));
+    this.uuid = 0;
+    this.colors = {};
     this.addInitialColors();
     this.currentColor = document.getElementsByClassName("color")[0];
     this.currentColor.classList.add("selected-color");
+  }
+
+  incrementId() {
+    this.uuid += 1;
   }
 
   handleColorSelection(e) {
@@ -16,9 +22,10 @@ class ColorList {
       this.currentColor = e.target.parentElement;
     }
     this.currentColor.classList.add("selected-color");
-    let hexColor = this.currentColor.children[2].value.slice(1);
+    let hexColor = this.currentColor.children[3].value.slice(1);
     hexInput.value = hexColor;
     opacityInput.value = this.currentColor.dataset.opacity;
+    percentFromInput.value = this.currentColor.dataset.percentFrom;
     percentInput.value = this.currentColor.dataset.percent;
     handleHexChange(hexColor);
   }
@@ -31,11 +38,15 @@ class ColorList {
       opacity: opacityInput.value,
       hex: hexInput.value,
       percent: percentInput.value,
+      percentFrom: percentFromInput.value,
       selectColor: this.handleColorSelection.bind(this),
       removeColor: this.removeColor.bind(this),
+      id: this.uuid,
     };
-    const newColor = new Color(colorObj);
-
+    this.incrementId();
+    let isConic = gradientType.value === "conic" ? true : false;
+    const newColor = new Color(colorObj, isConic);
+    this.colors[newColor.id] = newColor;
     this.list.insertBefore(newColor.render(), this.list.lastElementChild);
     jscolor.install();
     this.sortList();
@@ -48,7 +59,8 @@ class ColorList {
     colorListChildren.forEach((node) => this.list.appendChild(node));
   }
 
-  removeColor(e) {
+  removeColor(e, node) {
+    delete this.colors[node.id];
     e.target.parentElement.remove();
     e.stopPropagation();
     updateColorDisplay();
@@ -60,6 +72,7 @@ class ColorList {
     blueInput.value = 255;
     greenInput.value = 255;
     hexInput.value = "#FFFFFF";
+    percentFromInput.value = "99";
     percentInput.value = "100";
     updateColorDisplay();
     this.addNewColor();
@@ -67,7 +80,8 @@ class ColorList {
     greenInput.value = 45;
     blueInput.value = 45;
     hexInput.value = "#002D2D";
-    percentInput.value = "0";
+    percentFromInput.value = "0";
+    percentInput.value = "50";
     updateColorDisplay();
   }
 }
