@@ -40,10 +40,10 @@ const conicPercentInputOne = document.querySelector("#conic-at-percentage-one");
 const conicPercentInputTwo = document.querySelector("#conic-at-percentage-two");
 const measurementIcons = document.querySelectorAll(".input-icon");
 
-let red = 0;
-let green = 45;
-let blue = 45;
-let opacity = 1;
+let red = 177;
+let green = 13;
+let blue = 255;
+let opacity = 0.82;
 
 redInput.addEventListener("change", (e) => handleColorChange(e));
 blueInput.addEventListener("change", (e) => handleColorChange(e));
@@ -176,9 +176,7 @@ function handleColorChange(e) {
       colorList.currentColor.dataset.percent = e.target.value;
       colorList.currentColor.childNodes[2].innerHTML = `${e.target.value}%`;
       const innerText = colorList.currentColor.childNodes[1].innerHTML;
-      const newText = (innerText.split(
-        "<br>"
-      )[0] += `\nTo: ${e.target.value}%`);
+      const newText = (innerText.split("<br>")[0] += `\nTo: ${e.target.value}`);
       colorList.currentColor.childNodes[1].innerText = newText;
     }
   } else {

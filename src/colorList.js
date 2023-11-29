@@ -68,20 +68,41 @@ class ColorList {
 
   addInitialColors() {
     this.addNewColor();
-    redInput.value = 255;
-    blueInput.value = 255;
+
+    redInput.value = 13;
     greenInput.value = 255;
-    hexInput.value = "#FFFFFF";
+    blueInput.value = 201;
+    hexInput.value = "#0DFFC9";
+    percentFromInput.value = "10";
+    percentInput.value = "20";
+    opacityInput.value = 0.8;
+    this.addNewColor();
+
+    redInput.value = 0;
+    greenInput.value = 10;
+    blueInput.value = 248;
+    hexInput.value = "#000AF8";
+    percentFromInput.value = "30";
+    percentInput.value = "60";
+    opacityInput.value = 0.81;
+    this.addNewColor();
+
+    redInput.value = 62;
+    greenInput.value = 0;
+    blueInput.value = 47;
+    hexInput.value = "3E002F";
     percentFromInput.value = "99";
     percentInput.value = "100";
-    updateColorDisplay();
+    opacityInput.value = 1;
     this.addNewColor();
-    redInput.value = 0;
-    greenInput.value = 45;
-    blueInput.value = 45;
-    hexInput.value = "#002D2D";
+
+    redInput.value = 177;
+    greenInput.value = 13;
+    blueInput.value = 255;
+    hexInput.value = "#B10DFF";
     percentFromInput.value = "0";
-    percentInput.value = "50";
+    percentInput.value = "0";
+    opacityInput.value = 0.82;
     updateColorDisplay();
   }
 }
