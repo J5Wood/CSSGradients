@@ -5,24 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="styles/style.css" rel="stylesheet" />
-    <title>Gradient Tester</title>
+    <title>Gradient Maker</title>
   </head>
   <body>
     <main class="main-body">
-      <h1>CSS Gradient Tester</h1>
-      <span class="gradient-type main-background">
-        <h3 for="gradients">Gradient Type:</h3>
-        <select id="gradients" class="gradient-type">
-          <option value="radial">Radial Gradient</option>
-          <option value="linear">Linear Gradient</option>
-          <option value="conic">Conic Gradient</option>
-        </select>
+      <h1>CSS Gradient Maker</h1>
+      <span class="single-row-wrapper">
+        <span class="gradient-type main-background">
+          <h3 for="gradients">Gradient Type:</h3>
+          <select id="gradients" class="gradient-type">
+            <option value="radial">Radial Gradient</option>
+            <option value="linear">Linear Gradient</option>
+            <option value="conic">Conic Gradient</option>
+          </select>
+        </span>
+        <span class="code-display-wrapper main-background">
+          <p class="code-display"></p>
+          <button class="code-copy-button">COPY</button>
+        </span>
       </span>
       <div class="selection-display"></div>
-      <div class="code-display-wrapper">
-        <div class="code-display"></div>
-        <button class="code-copy-button">COPY</button>
-      </div>
       <div class="body-columns">
         <span class="linear-options main-background">
           <label for="degrees">Degrees: </label>
@@ -150,9 +152,6 @@
         </span>
 
         <span class="conic-options main-background">
-          <!-- from #NUM turns or #NUM degrees at #X% #Y%, color, optional start
-          degree and end degree, color, optional start degree and end degree,
-          color, optional start degree and end degree -->
           <span class="conic-from-types">
             FROM:
             <input
@@ -212,17 +211,40 @@
         </ul>
 
         <div class="color-input">
-          <label for="hex-value" class="main-background"
-            >Hex:
-            <input
-              type="text"
-              name="hex-value"
-              id="hex-value"
-              value="#B10DFF"
-              maxlength="7"
-              class="hex-value"
-            />
-          </label>
+          <span class="main-background percentage-container">
+            <label
+              for="percentage-from-input"
+              class="percentage-from-display hide-display"
+              >From
+              <span>
+                <input
+                  type="number"
+                  name="percentage-from-input"
+                  id="percentage-from-input"
+                  step="1"
+                  value="0"
+                  class="percentage-from-input"
+                />
+                <i class="input-icon">%</i>
+              </span>
+              <br />
+            </label>
+
+            <label for="percentage-input"
+              ><span class="percentage-to-text hide-display">To </span>
+              <span>
+                <input
+                  type="number"
+                  name="percentage-input"
+                  id="percentage-input"
+                  step="1"
+                  value="0"
+                  class="percentage-input"
+                />
+                <i class="input-icon">%</i>
+              </span>
+            </label>
+          </span>
 
           <label for="red" class="main-background"
             >Red:
@@ -283,40 +305,17 @@
             />
           </label>
 
-          <span class="main-background percentage-container">
-            <label
-              for="percentage-from-input"
-              class="percentage-from-display hide-display"
-              >From
-              <span>
-                <input
-                  type="number"
-                  name="percentage-from-input"
-                  id="percentage-from-input"
-                  step="1"
-                  value="0"
-                  class="percentage-from-input"
-                />
-                <i class="input-icon">%</i>
-              </span>
-              <br />
-            </label>
-
-            <label for="percentage-input"
-              ><span class="percentage-to-text hide-display">To </span>
-              <span>
-                <input
-                  type="number"
-                  name="percentage-input"
-                  id="percentage-input"
-                  step="1"
-                  value="0"
-                  class="percentage-input"
-                />
-                <i class="input-icon">%</i>
-              </span>
-            </label>
-          </span>
+          <label for="hex-value" class="main-background"
+            >Hex:
+            <input
+              type="text"
+              name="hex-value"
+              id="hex-value"
+              value="#B10DFF"
+              maxlength="7"
+              class="hex-value"
+            />
+          </label>
         </div>
       </div>
     </main>

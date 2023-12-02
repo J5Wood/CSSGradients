@@ -90,7 +90,7 @@ class ColorList {
     redInput.value = 62;
     greenInput.value = 0;
     blueInput.value = 47;
-    hexInput.value = "3E002F";
+    hexInput.value = "#3E002F";
     percentFromInput.value = "99";
     percentInput.value = "100";
     opacityInput.value = 1;
