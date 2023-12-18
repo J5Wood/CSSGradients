@@ -61,7 +61,6 @@ h3 {
   box-shadow: 2px 1px 3px rgb(161, 160, 160);
   background-color: #fbfbfb;
   width: max-content;
-  justify-self: center;
 }
 
 .selection-display {
@@ -106,7 +105,7 @@ h3 {
 .body-columns {
   display: grid;
   gap: 1em 0;
-  width: min(100%, 700px);
+  width: min(95vw, 700px);
   grid-template-columns: calc(50% - 0.5em) calc(50% - 0.5em);
   grid-template-rows: min-content min-content min-content;
   align-items: center;
@@ -153,48 +152,47 @@ h3 {
 
 .color-input {
   display: grid;
-  gap: 1em 1em;
-  grid-template-columns: auto auto auto;
+  width: 100%;
+  gap: 1em 0;
+  grid-auto-columns: minmax(0, 1fr);
   grid-template-rows: 1fr 1fr 1fr;
-  justify-items: center;
-  width: fit-content;
+  justify-items: start;
   align-self: start;
   padding-top: 1em;
 }
 
 .percentage-container {
+  min-width: 50%;
   grid-column: 1 / 4;
-  display: flex;
-  flex-flow: row nowrap;
   align-items: center;
-  gap: 0.5em;
   display: grid;
   grid-template-rows: auto;
   grid-template-columns: auto;
-  justify-self: center;
 }
 
-.percentage-container input {
-  width: 6em;
+.color-input input {
+  max-width: 6em;
 }
 
 .color-input > label:nth-child(n + 2):nth-child(-n + 4) {
   grid-row: 2 / 3;
+  max-width: 90%;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
 }
 
 .color-input > label:nth-child(2) {
   box-shadow: 2px 1px 3px rgb(255, 0, 0);
-  max-width: 80px;
 }
 
 .color-input > label:nth-child(3) {
   box-shadow: 2px 1px 3px rgb(0, 255, 0);
-  max-width: 80px;
 }
 
 .color-input > label:nth-child(4) {
   box-shadow: 2px 1px 3px rgb(0, 0, 255);
-  max-width: 80px;
 }
 
 .color-input > label:nth-child(5) {
@@ -202,23 +200,18 @@ h3 {
   grid-column: 1 / 2;
   display: flex;
   flex-flow: column nowrap;
-  width: 80px;
+  max-width: 95%;
+  justify-content: center;
   align-items: center;
-  justify-self: start;
 }
 
 .color-input > label:nth-child(6) {
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: column nowrap;
   align-items: center;
   justify-content: center;
   grid-column: 2 / 4;
   grid-row: 3 / 4;
-  justify-self: center;
-}
-
-.hex-value {
-  max-width: 100px;
 }
 
 .hide-display {
