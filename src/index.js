@@ -51,9 +51,7 @@ greenInput.addEventListener("change", (e) => handleColorChange(e));
 opacityInput.addEventListener("change", (e) => handleColorChange(e));
 percentInput.addEventListener("change", (e) => handleColorChange(e));
 percentFromInput.addEventListener("change", (e) => handleColorChange(e));
-hexInput.addEventListener("change", (e) =>
-  handleHexChange(e.target.value.slice(1))
-);
+hexInput.addEventListener("change", (e) => handleHexChange(e.target.value));
 
 redInput.addEventListener("keyup", (e) => handleColorChange(e));
 blueInput.addEventListener("keyup", (e) => handleColorChange(e));
@@ -198,7 +196,8 @@ function handleColorChange(e) {
     if (hexValArr[i] === "NaN") hexValArr[i] = "00";
     hexValArr[i] = hexValArr[i].padStart(2, "0");
   }
-  hexInput.value = `#${hexValArr.join("").toUpperCase()}`;
+  const newHexValue = hexValArr.join("").toUpperCase();
+  hexInput.value = `#${newHexValue}`;
 
   // Set selected color swatch to current color, update displayed hex
   colorList.currentColor.children[0].jscolor.fromRGBA(
@@ -208,17 +207,18 @@ function handleColorChange(e) {
     opacity
   );
   colorList.currentColor.setAttribute("data-opacity", `${opacity}`);
-  colorList.currentColor.getElementsByTagName("input")[0].value = `#${hexValArr
-    .join("")
-    .toUpperCase()}`;
+  colorList.currentColor.setAttribute("data-hex-value", `#${newHexValue}`);
 
   sortColorList();
   updateColorDisplay();
 }
 
 function handleHexChange(value) {
+  // Handle octothorpe
+  if (value[0] === "#") value = value.slice(1);
+
   // Change any non hex values to 0
-  value = value.replace(/[^0-9a-fA-F]/gm, "0");
+  value = value.replace(/[^0-9a-fA-F]/gm, "0").toUpperCase();
 
   // Change input  to correct length
   if (value.length < 6) {
@@ -239,8 +239,11 @@ function handleHexChange(value) {
     blue,
     opacity
   );
-  colorList.currentColor.getElementsByTagName("input")[0].value = `#${value}`;
+
+  // Add formatted hex value
+  colorList.currentColor.setAttribute("data-hex-value", `#${value}`);
   hexInput.value = `#${value}`;
+
   sortColorList();
   updateColorDisplay();
 }
@@ -400,8 +403,7 @@ function updateIndividualColorSelectors(picker) {
   blueInput.value = blue = Math.round(picker.channels.b);
   opacityInput.value = opacity = picker.channels.a.toFixed(2);
   hexInput.value = picker.toHEXString();
-  colorList.currentColor.getElementsByTagName("input")[0].value =
-    picker.toHEXString();
+  colorList.currentColor.setAttribute("data-hex-value", picker.toHEXString());
   colorList.currentColor.dataset.opacity = picker.channels.a;
 
   updateColorDisplay();

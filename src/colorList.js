@@ -22,7 +22,9 @@ class ColorList {
       this.currentColor = e.target.parentElement;
     }
     this.currentColor.classList.add("selected-color");
-    let hexColor = this.currentColor.children[3].value.slice(1);
+
+    // Change hex, opacity, and percent values manually, handleHexChange function updates color input values, but does run full update for color display
+    let hexColor = this.currentColor.dataset.hexValue;
     hexInput.value = hexColor;
     opacityInput.value = this.currentColor.dataset.opacity;
     percentFromInput.value = this.currentColor.dataset.percentFrom;

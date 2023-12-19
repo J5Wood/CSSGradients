@@ -138,16 +138,18 @@ h3 {
   display: flex;
   flex-flow: column;
 }
+
 .radial-types {
   display: flex;
   flex-direction: column;
 }
 
 .conic-options {
+  max-width: 95%;
   grid-column: 1 / span 2;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 1fr;
 }
 
 .color-input {
@@ -264,8 +266,8 @@ h3 {
   height: fit-content;
   padding: 2px;
   border: 2px solid black;
-  gap: 1em;
   border-radius: 0.5em;
+  white-space: nowrap;
 }
 
 .selected-color {
@@ -273,9 +275,6 @@ h3 {
   border-width: 5px;
 }
 
-.color p {
-  font-size: 1.25em;
-}
 .color input {
   width: 50px;
 }
@@ -286,7 +285,6 @@ h3 {
   height: 28px;
   width: 28px;
 }
-
 .delete-color-button {
   background-color: rgb(231, 0, 0);
   color: rgb(0, 0, 0);

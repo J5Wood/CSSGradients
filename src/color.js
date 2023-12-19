@@ -33,6 +33,7 @@ class Color {
     newItem.setAttribute("data-opacity", this.opacity);
     newItem.setAttribute("data-percent-from", this.percentFrom);
     newItem.setAttribute("data-percent", this.percent);
+    newItem.setAttribute("data-hex-value", this.hex);
 
     const colorSwatch = document.createElement("button");
     colorSwatch.classList.add("color-sample");
@@ -54,15 +55,6 @@ class Color {
       fullPercentDisplay.classList.add("hide-display");
     }
 
-    const input = document.createElement("input");
-    input.setAttribute("name", "color-input");
-    input.setAttribute("type", "text");
-    input.setAttribute("value", this.hex);
-    input.setAttribute("maxLength", "7");
-    input.addEventListener("change", (e) => {
-      return handleHexChange(e.target.value.slice(1));
-    });
-
     const button = document.createElement("button");
     button.classList.add("delete-color-button");
     button.innerText = "X";
@@ -71,7 +63,6 @@ class Color {
     newItem.appendChild(colorSwatch);
     newItem.appendChild(fullPercentDisplay);
     newItem.appendChild(percentDisplay);
-    newItem.appendChild(input);
     newItem.appendChild(button);
     newItem.addEventListener("click", (e) => this.selectColor(e));
     return newItem;
