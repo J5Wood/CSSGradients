@@ -270,13 +270,36 @@ h3 {
   white-space: nowrap;
 }
 
+@media (max-width: 450px) {
+  .color {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    align-items: center;
+    justify-items: center;
+  }
+  .color-sample {
+    grid-row: 1 / 2;
+    grid-column: 1 / 2;
+  }
+
+  .delete-color-button {
+    grid-row: 1 / 2;
+    grid-column: 2 / 3;
+  }
+
+  .conic-display-element {
+    grid-column: span 2;
+  }
+
+  .percent-display {
+    grid-column: span 2;
+  }
+}
+
 .selected-color {
   height: fit-content;
   border-width: 5px;
-}
-
-.color input {
-  width: 50px;
 }
 
 .color-sample {
@@ -285,8 +308,14 @@ h3 {
   height: 28px;
   width: 28px;
 }
+
 .delete-color-button {
   background-color: rgb(231, 0, 0);
   color: rgb(0, 0, 0);
   cursor: pointer;
+  width: 1.5em;
+  height: 1.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
